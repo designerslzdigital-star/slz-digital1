@@ -1,5 +1,10 @@
 import { useState } from "react";
 import { Instagram, Target, Camera, PenTool, Brain, ChevronLeft, ChevronRight } from "lucide-react";
+import socialMediaImg from "@/assets/services/social-media.jpg";
+import trafegoPagoImg from "@/assets/services/trafego-pago.jpg";
+import videomakerImg from "@/assets/services/videomaker.jpg";
+import designImg from "@/assets/services/design.jpg";
+import iaEstrategiaImg from "@/assets/services/ia-estrategia.jpg";
 
 const services = [
   {
@@ -7,30 +12,35 @@ const services = [
     title: "Social Media",
     description: "Conteúdo estratégico que gera conexão, autoridade e vendas todos os dias.",
     bullets: ["Cards, carrosséis e vídeos curtos", "Calendário editorial estratégico", "Identidade visual consistente"],
+    image: socialMediaImg,
   },
   {
     icon: Target,
     title: "Tráfego Pago",
     description: "Anúncios que colocam sua empresa na frente de quem quer e pode comprar.",
     bullets: ["Campanhas no Meta Ads e Google", "Otimização semanal", "Relatório de performance"],
+    image: trafegoPagoImg,
   },
   {
     icon: Camera,
     title: "Videomaker & Edição",
     description: "Vídeos profissionais que geram autoridade, alcance e conversão.",
     bullets: ["Produção profissional completa", "Edição para Reels e YouTube", "Roteiro e direção criativa"],
+    image: videomakerImg,
   },
   {
     icon: PenTool,
     title: "Design",
     description: "Identidade visual que comunica antes mesmo do vendedor falar.",
     bullets: ["Criação de identidade visual", "Materiais para campanhas", "Peças para redes sociais"],
+    image: designImg,
   },
   {
     icon: Brain,
     title: "Estratégia com IA",
     description: "Inteligência artificial aplicada ao marketing do seu negócio.",
     bullets: ["Automação de conteúdo", "Análise inteligente de dados", "Relatórios automatizados"],
+    image: iaEstrategiaImg,
   },
 ];
 
@@ -67,11 +77,14 @@ const Services = () => {
               </ul>
             </div>
 
-            {/* Right - Mockup placeholder */}
-            <div className="bg-surface flex items-center justify-center min-h-[300px] p-8">
-              <div className="w-48 h-80 rounded-3xl border-2 border-border bg-background flex items-center justify-center">
-                <Icon className="w-12 h-12 text-primary/30" />
-              </div>
+            {/* Right - Image */}
+            <div className="bg-surface flex items-center justify-center min-h-[300px] p-4">
+              <img
+                src={service.image}
+                alt={service.title}
+                loading="lazy"
+                className="w-full h-full object-cover rounded-xl max-h-[400px]"
+              />
             </div>
           </div>
 

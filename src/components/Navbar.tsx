@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Globe, Menu, X, MessageCircle } from "lucide-react";
+import { Menu, X, MessageCircle } from "lucide-react";
+import slzLogo from "@/assets/slz-logo.png";
 
 const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=5598982990007&text=Olá%2C%20vim%20do%20site%20SLZ%20Digital.";
 
@@ -31,12 +32,8 @@ const Navbar = () => {
     >
       <div className="container mx-auto flex items-center justify-between h-16 px-4 lg:px-8">
         {/* Logo */}
-        <a href="#inicio" className="flex items-center gap-2">
-          <Globe className="w-6 h-6 text-primary" />
-          <span className="font-heading text-xl">
-            <span className="font-bold text-primary">SLZ</span>
-            <span className="text-primary font-normal ml-1">DIGITAL</span>
-          </span>
+        <a href="#inicio" className="flex items-center">
+          <img src={slzLogo} alt="SLZ Digital" className="h-10 w-auto" />
         </a>
 
         {/* Desktop Nav */}
