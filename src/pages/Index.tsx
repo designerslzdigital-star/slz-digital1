@@ -1,16 +1,36 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import MarqueeSection from "@/components/Marquee";
+import Stats from "@/components/Stats";
+import PainPoints from "@/components/PainPoints";
+import Services from "@/components/Services";
+import AboutDiego from "@/components/AboutDiego";
+import ClientLogos from "@/components/ClientLogos";
+import Packages from "@/components/Packages";
+import HowItWorks from "@/components/HowItWorks";
+import InstagramFeed from "@/components/InstagramFeed";
+import FinalCTA from "@/components/FinalCTA";
+import Footer from "@/components/Footer";
+import WhatsAppButton from "@/components/WhatsAppButton";
+import ScrollAnimator from "@/components/ScrollAnimator";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
-  return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
-    </div>
-  );
-};
-
-const Index = PlaceholderIndex;
+const Index = () => (
+  <div className="min-h-screen bg-background">
+    <Navbar />
+    <Hero />
+    <MarqueeSection />
+    <ScrollAnimator><Stats /></ScrollAnimator>
+    <ScrollAnimator><PainPoints /></ScrollAnimator>
+    <ScrollAnimator><Services /></ScrollAnimator>
+    <ScrollAnimator><AboutDiego /></ScrollAnimator>
+    <ClientLogos />
+    <ScrollAnimator><Packages /></ScrollAnimator>
+    <ScrollAnimator><HowItWorks /></ScrollAnimator>
+    <ScrollAnimator><InstagramFeed /></ScrollAnimator>
+    <ScrollAnimator><FinalCTA /></ScrollAnimator>
+    <Footer />
+    <WhatsAppButton />
+  </div>
+);
 
 export default Index;
