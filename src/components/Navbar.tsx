@@ -1,0 +1,96 @@
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Globe, Menu, X, MessageCircle } from "lucide-react";
+
+const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=5598982990007&text=Olá%2C%20vim%20do%20site%20SLZ%20Digital.";
+
+const navLinks = [
+  { label: "Início", href: "#inicio" },
+  { label: "Serviços", href: "#servicos" },
+  { label: "Pacotes", href: "#pacotes" },
+  { label: "Portfólio", href: "#portfolio" },
+  { label: "Sobre", href: "#sobre" },
+  { label: "Contato", href: "#contato" },
+];
+
+const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled ? "bg-background/90 backdrop-blur-xl border-b border-border" : "bg-transparent backdrop-blur-sm"
+      }`}
+    >
+      <div className="container mx-auto flex items-center justify-between h-16 px-4 lg:px-8">
+        {/* Logo */}
+        <a href="#inicio" className="flex items-center gap-2">
+          <Globe className="w-6 h-6 text-primary" />
+          <span className="font-heading text-xl">
+            <span className="font-bold text-primary">SLZ</span>
+            <span className="text-primary font-normal ml-1">DIGITAL</span>
+          </span>
+        </a>
+
+        {/* Desktop Nav */}
+        <div className="hidden lg:flex items-center gap-8">
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+
+        {/* CTA */}
+        <div className="hidden lg:block">
+          <Button variant="cyan" size="sm" asChild>
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+              <MessageCircle className="w-4 h-4" />
+              Falar no WhatsApp
+            </a>
+          </Button>
+        </div>
+
+        {/* Mobile Toggle */}
+        <button className="lg:hidden text-foreground" onClick={() => setMobileOpen(!mobileOpen)}>
+          {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      {mobileOpen && (
+        <div className="lg:hidden bg-background/95 backdrop-blur-xl border-b border-border px-4 pb-6">
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={() => setMobileOpen(false)}
+              className="block py-3 text-muted-foreground hover:text-foreground transition-colors"
+            >
+              {link.label}
+            </a>
+          ))}
+          <Button variant="cyan" size="sm" className="mt-4 w-full" asChild>
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+              <MessageCircle className="w-4 h-4" />
+              Falar no WhatsApp
+            </a>
+          </Button>
+        </div>
+      )}
+    </nav>
+  );
+};
+
+export default Navbar;
