@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MapPin } from "lucide-react";
+import diegoImg from "@/assets/diego.png";
 
 const Hero = () => {
   return (
@@ -15,12 +16,10 @@ const Hero = () => {
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left - Photo placeholder */}
+          {/* Left - Photo */}
           <div className="hidden lg:flex justify-center">
-            <div className="relative w-full max-w-md aspect-[3/4] rounded-2xl bg-card border border-border flex items-center justify-center">
-              <span className="text-muted-foreground text-center px-8 font-heading">
-                FOTO DIEGO — sem fundo
-              </span>
+            <div className="relative w-full max-w-md aspect-[3/4] rounded-2xl overflow-hidden">
+              <img src={diegoImg} alt="Diego - Fundador SLZ Digital" className="w-full h-full object-cover object-top" />
             </div>
           </div>
 

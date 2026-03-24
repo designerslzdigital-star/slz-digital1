@@ -1,26 +1,22 @@
 import { Button } from "@/components/ui/button";
-import { Check } from "lucide-react";
+import { Check, MessageCircle } from "lucide-react";
 
 const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=5598982990007&text=Olá%2C%20vim%20do%20site%20SLZ%20Digital.";
 
 const packages = [
   {
     name: "Essencial",
-    price: "R$ 1.000",
-    period: "/mês",
     featured: false,
     features: [
-      "12 posts por mês",
+      "Gestão de redes sociais",
       "Cards, carrosséis e vídeos curtos",
       "Gestão do Instagram",
       "Relatório mensal",
     ],
-    cta: "Começar agora",
+    cta: "Solicitar orçamento",
   },
   {
     name: "Acelerador",
-    price: "R$ 1.400",
-    period: "/mês",
     featured: true,
     badge: "MAIS ESCOLHIDO",
     features: [
@@ -30,12 +26,10 @@ const packages = [
       "Otimização semanal",
       "Relatório de anúncios",
     ],
-    cta: "Quero o Acelerador",
+    cta: "Solicitar orçamento",
   },
   {
     name: "Estratégico",
-    price: "Sob consulta",
-    period: "",
     featured: false,
     features: [
       "Estratégia personalizada",
@@ -43,7 +37,7 @@ const packages = [
       "IA aplicada ao negócio",
       "Atendimento prioritário",
     ],
-    cta: "Solicitar proposta",
+    cta: "Solicitar orçamento",
   },
 ];
 
@@ -73,12 +67,11 @@ const Packages = () => (
               </span>
             )}
             <h3 className="font-heading font-bold text-xl mb-2">{pkg.name}</h3>
-            <p className="text-3xl font-heading font-bold text-primary">
-              {pkg.price}
-              <span className="text-sm text-silver font-normal">{pkg.period}</span>
+            <p className="text-lg font-heading text-primary font-semibold mb-2">
+              Sob consulta
             </p>
 
-            <ul className="mt-6 space-y-3 flex-1">
+            <ul className="mt-4 space-y-3 flex-1">
               {pkg.features.map((f, j) => (
                 <li key={j} className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-primary flex-shrink-0" />
@@ -93,6 +86,7 @@ const Packages = () => (
               asChild
             >
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+                <MessageCircle className="w-4 h-4" />
                 {pkg.cta}
               </a>
             </Button>

@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Check, MessageCircle } from "lucide-react";
+import diegoImg from "@/assets/diego.png";
 
 const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=5598982990007&text=Olá%2C%20vim%20do%20site%20SLZ%20Digital.";
 
@@ -24,10 +25,8 @@ const AboutDiego = () => (
       <div className="grid lg:grid-cols-2 gap-12 items-center">
         {/* Left - Photo */}
         <div className="relative flex justify-center">
-          <div className="w-full max-w-sm aspect-[3/4] rounded-2xl bg-card border border-border flex items-center justify-center">
-            <span className="text-muted-foreground text-center px-8 font-heading">
-              FOTO DIEGO — sem fundo
-            </span>
+          <div className="w-full max-w-sm aspect-[3/4] rounded-2xl overflow-hidden">
+            <img src={diegoImg} alt="Diego - Fundador SLZ Digital" className="w-full h-full object-cover object-top" />
           </div>
           {/* Floating badges */}
           {badges.map((badge, i) => (

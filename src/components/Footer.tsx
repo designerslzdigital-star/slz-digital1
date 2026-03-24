@@ -1,4 +1,5 @@
-import { Globe, MapPin, Phone, Instagram } from "lucide-react";
+import { MapPin, Phone, Instagram } from "lucide-react";
+import slzLogo from "@/assets/slz-logo.png";
 
 const Footer = () => (
   <footer className="border-t border-border py-12">
@@ -6,12 +7,8 @@ const Footer = () => (
       <div className="grid md:grid-cols-3 gap-8">
         {/* Logo */}
         <div>
-          <a href="#inicio" className="flex items-center gap-2 mb-4">
-            <Globe className="w-5 h-5 text-primary" />
-            <span className="font-heading text-lg">
-              <span className="font-bold text-primary">SLZ</span>
-              <span className="text-primary font-normal ml-1">DIGITAL</span>
-            </span>
+          <a href="#inicio" className="flex items-center mb-4">
+            <img src={slzLogo} alt="SLZ Digital" className="h-8 w-auto" />
           </a>
           <div className="space-y-2 text-sm text-silver">
             <a
