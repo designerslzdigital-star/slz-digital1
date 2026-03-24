@@ -1,17 +1,29 @@
+import shoppingLimpeza from "@/assets/clients/shopping-limpeza.png";
+import genialConsultoria from "@/assets/clients/genial-consultoria.png";
+import viaTaxi from "@/assets/clients/via-taxi.png";
+import uarauTour from "@/assets/clients/uarau-tour.png";
+import bucomed from "@/assets/clients/bucomed.png";
+import faceimplante from "@/assets/clients/faceimplante.png";
+import pagcarro from "@/assets/clients/pagcarro.png";
+import taguatur from "@/assets/clients/taguatur.png";
+import editoraInternacional from "@/assets/clients/editora-internacional.png";
+import decanter from "@/assets/clients/decanter.png";
+
 const clients = [
-  "Shopping da Limpeza",
-  "Genial Consultoria",
-  "Via Táxi Aéreo",
-  "Uarau Tour",
-  "Bucomed",
-  "Faceimplante",
-  "PagCarro",
-  "Taguatur",
-  "Editora Internacional",
+  { name: "Shopping da Limpeza", logo: shoppingLimpeza },
+  { name: "Genial Consultoria", logo: genialConsultoria },
+  { name: "Via Táxi Aéreo", logo: viaTaxi },
+  { name: "Uarau Tour", logo: uarauTour },
+  { name: "Bucomed", logo: bucomed },
+  { name: "Faceimplante", logo: faceimplante },
+  { name: "PagCarro", logo: pagcarro },
+  { name: "Taguatur", logo: taguatur },
+  { name: "Editora Internacional", logo: editoraInternacional },
+  { name: "Decanter", logo: decanter },
 ];
 
 const ClientLogos = () => {
-  const doubled = [...clients, ...clients];
+  const allClients = [...clients, ...clients];
 
   return (
     <section id="portfolio" className="py-16">
@@ -21,22 +33,22 @@ const ClientLogos = () => {
         </p>
       </div>
       <div className="overflow-hidden marquee-mask">
-        <div className="animate-marquee-slow whitespace-nowrap inline-flex gap-4">
-          {doubled.map((client, i) => (
-            <span
+        <div className="animate-marquee-slow whitespace-nowrap inline-flex items-center gap-12">
+          {allClients.map((client, i) => (
+            <img
               key={i}
-              className="inline-block px-5 py-2.5 rounded-full border border-silver/20 bg-card text-foreground font-heading font-bold text-sm whitespace-nowrap"
-            >
-              {client}
-            </span>
+              src={client.logo}
+              alt={client.name}
+              className="h-10 w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity flex-shrink-0"
+            />
           ))}
-          {doubled.map((client, i) => (
-            <span
+          {allClients.map((client, i) => (
+            <img
               key={`dup-${i}`}
-              className="inline-block px-5 py-2.5 rounded-full border border-silver/20 bg-card text-foreground font-heading font-bold text-sm whitespace-nowrap"
-            >
-              {client}
-            </span>
+              src={client.logo}
+              alt={client.name}
+              className="h-10 w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity flex-shrink-0"
+            />
           ))}
         </div>
       </div>
