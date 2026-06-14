@@ -17,7 +17,7 @@ const Hero = () => {
       <div className="relative z-10 w-full min-h-screen grid lg:grid-cols-2">
         {/* Left - Photo */}
         <div className="hidden lg:flex items-center justify-center relative min-h-screen p-8">
-          <div className="w-full h-full rounded-2xl overflow-hidden">
+          <div className="max-h-[500px] rounded-2xl overflow-hidden aspect-[3/4]">
             <img
               src={predioImg.url}
               alt="Marcus Barbosa | Intelligent Office"
