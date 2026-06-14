@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Check, MessageCircle } from "lucide-react";
+import { MessageCircle, GraduationCap, Globe, Building2, TrendingUp } from "lucide-react";
 import diegoImg from "@/assets/diego.png";
 
 const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=5598982990007&text=Olá%2C%20vim%20do%20site%20SLZ%20Digital.";
@@ -10,13 +10,27 @@ const badges = [
   { value: "Exp.", label: "Internacional" },
 ];
 
-const includes = [
-  "Gestão completa de redes sociais",
-  "Tráfego Pago (Meta Ads)",
-  "Produção de vídeo profissional",
-  "Design e identidade visual",
-  "Estratégia com Inteligência Artificial",
-  "Relatórios mensais de performance",
+const highlights = [
+  {
+    icon: GraduationCap,
+    title: "Administrador de Formação e Especialista em Marketing Digital",
+    desc: "Formação sólida em Administração com especialização em Marketing Digital",
+  },
+  {
+    icon: Globe,
+    title: "5 Anos Morando no Exterior",
+    desc: "Experiência internacional que expandiu sua visão de mercado",
+  },
+  {
+    icon: Building2,
+    title: "Experiência com Empresas Multinacionais",
+    desc: "Atuação direta com grandes corporações globais",
+  },
+  {
+    icon: TrendingUp,
+    title: "8 Anos à Frente da SLZ Digital",
+    desc: "Liderando resultados reais para negócios locais e regionais",
+  },
 ];
 
 const AboutDiego = () => (
@@ -58,14 +72,26 @@ const AboutDiego = () => (
             Diego é administrador de formação e especialista em marketing digital. Viveu 5 anos no exterior, onde acumulou experiência internacional e atuou com empresas multinacionais. Com 8 anos à frente da SLZ Digital, formação em Administração e Marketing Digital lidera uma equipe focada em resultados reais para negócios locais e regionais que querem crescer de verdade no digital.
           </p>
 
-          <div className="bg-surface rounded-xl p-6 space-y-3">
-            <p className="font-heading font-semibold text-sm text-silver mb-4">O que está incluído</p>
-            {includes.map((item, i) => (
-              <div key={i} className="flex items-center gap-3">
-                <Check className="w-4 h-4 text-primary flex-shrink-0" />
-                <span className="text-sm text-foreground">{item}</span>
-              </div>
-            ))}
+          <div
+            className="rounded-xl p-6"
+            style={{
+              backgroundColor: "#161616",
+              border: "1px solid rgba(255,255,255,0.08)",
+            }}
+          >
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              {highlights.map((item, i) => (
+                <div key={i} className="flex items-start gap-3">
+                  <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "rgba(0,204,240,0.12)" }}>
+                    <item.icon className="w-5 h-5" style={{ color: "#00ccf0" }} />
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-white leading-snug">{item.title}</p>
+                    <p className="text-xs mt-1" style={{ color: "#888" }}>{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
           <Button variant="cyan" size="lg" className="w-full" asChild>
