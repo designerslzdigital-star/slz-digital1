@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { X, Send, Check } from "lucide-react";
 import slzLogo from "@/assets/slz-logo.png";
 
@@ -131,10 +132,20 @@ export default function BookingChat({ onClose }: { onClose: () => void }) {
   const current = steps[stepIdx];
   const days = getNextDays(8);
 
-  return (
+  if (typeof document === "undefined") return null;
+
+  return createPortal(
     <div
-      className="fixed inset-0 z-[100] flex flex-col"
-      style={{ background: "#080808" }}
+      className="flex flex-col"
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100vw",
+        height: "100vh",
+        zIndex: 9999,
+        background: "#080808",
+      }}
     >
       {/* Top bar */}
       <div className="flex items-center justify-between px-4 md:px-8 py-4 border-b" style={{ borderColor: "#1a1a1a" }}>
@@ -295,6 +306,7 @@ export default function BookingChat({ onClose }: { onClose: () => void }) {
           </div>
         </div>
       )}
-    </div>
+    </div>,
+    document.body,
   );
 }
