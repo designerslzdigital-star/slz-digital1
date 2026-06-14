@@ -17,11 +17,11 @@ const Hero = () => {
       <div className="relative z-10 w-full min-h-screen grid lg:grid-cols-2">
         {/* Left - Photo */}
         <div className="hidden lg:flex items-center justify-center relative min-h-screen p-8">
-          <div className="w-full h-full rounded-2xl overflow-hidden">
+          <div className="w-full max-h-[500px] rounded-2xl overflow-hidden">
             <img
               src={predioImg.url}
               alt="Marcus Barbosa | Intelligent Office"
-              className="w-full h-full object-cover"
+              className="w-full h-full max-h-[500px] object-cover"
               style={{ objectPosition: "center top" }}
             />
           </div>
