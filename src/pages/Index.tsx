@@ -23,7 +23,7 @@ const Index = () => (
     <ScrollAnimator><PainPoints /></ScrollAnimator>
     <ScrollAnimator><Services /></ScrollAnimator>
     <ScrollAnimator><AboutDiego /></ScrollAnimator>
-    <ClientLogos />
+    <ScrollAnimator><ClientLogos /></ScrollAnimator>
     <ScrollAnimator><Niches /></ScrollAnimator>
     <ScrollAnimator><HowItWorks /></ScrollAnimator>
     <ScrollAnimator><FAQ /></ScrollAnimator>

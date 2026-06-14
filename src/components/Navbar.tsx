@@ -60,14 +60,20 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Toggle */}
-        <button className="lg:hidden text-foreground" onClick={() => setMobileOpen(!mobileOpen)}>
+        <button
+          className="lg:hidden text-foreground min-h-11 min-w-11 inline-flex items-center justify-center"
+          onClick={() => setMobileOpen(!mobileOpen)}
+          aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-menu"
+        >
           {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="lg:hidden bg-background/95 backdrop-blur-xl border-b border-border px-4 pb-6">
+        <div id="mobile-menu" className="lg:hidden bg-background/95 backdrop-blur-xl border-b border-border px-4 pb-6">
           {navLinks.map((link) => (
             <a
               key={link.href}

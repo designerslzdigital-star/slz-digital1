@@ -60,6 +60,9 @@ const FAQ = () => {
                 <button
                   onClick={() => toggle(index)}
                   className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
+                  aria-expanded={isOpen}
+                  aria-controls={`faq-panel-${index}`}
+                  id={`faq-trigger-${index}`}
                 >
                   <span className="font-heading font-bold text-white text-base md:text-lg">
                     {faq.question}
@@ -79,6 +82,9 @@ const FAQ = () => {
                   </span>
                 </button>
                 <div
+                  id={`faq-panel-${index}`}
+                  role="region"
+                  aria-labelledby={`faq-trigger-${index}`}
                   className="overflow-hidden transition-all duration-300 ease-out"
                   style={{
                     maxHeight: isOpen ? "500px" : "0",
