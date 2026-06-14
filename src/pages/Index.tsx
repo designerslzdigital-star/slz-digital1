@@ -8,6 +8,7 @@ import AboutDiego from "@/components/AboutDiego";
 import ClientLogos from "@/components/ClientLogos";
 import HowItWorks from "@/components/HowItWorks";
 import Niches from "@/components/Niches";
+import FAQ from "@/components/FAQ";
 import BookingCTA from "@/components/BookingCTA";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
