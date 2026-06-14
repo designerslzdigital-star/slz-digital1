@@ -7,7 +7,6 @@ import Services from "@/components/Services";
 import AboutDiego from "@/components/AboutDiego";
 import ClientLogos from "@/components/ClientLogos";
 import HowItWorks from "@/components/HowItWorks";
-import FinalCTA from "@/components/FinalCTA";
 import Niches from "@/components/Niches";
 import BookingCTA from "@/components/BookingCTA";
 import Footer from "@/components/Footer";
@@ -27,7 +26,6 @@ const Index = () => (
     <ScrollAnimator><Niches /></ScrollAnimator>
     <ScrollAnimator><HowItWorks /></ScrollAnimator>
     <ScrollAnimator><BookingCTA /></ScrollAnimator>
-    <ScrollAnimator><FinalCTA /></ScrollAnimator>
     <Footer />
     <WhatsAppButton />
   </div>

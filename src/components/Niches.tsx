@@ -4,8 +4,8 @@ const Niches = () => (
   <section id="nichos" className="py-20 relative">
     <div className="container mx-auto px-4">
       {/* Segmentos */}
-      <div className="text-center mb-12">
-        <p className="text-[#888888] text-lg mb-4">
+      <div className="text-center mb-12 py-8">
+        <p className="mb-10" style={{ color: "#888888", fontSize: "17px" }}>
           Atendemos negócios de todos os segmentos — do consultório ao e-commerce, do escritório à loja física.
         </p>
         <p className="text-white font-bold text-xl">
@@ -43,7 +43,11 @@ const Niches = () => (
                 Varejo
               </span>
             </div>
-            <h3 className="font-heading font-bold text-2xl mb-4">Shopping da Limpeza</h3>
+            <h3 className="font-heading font-bold text-2xl mb-2">Shopping da Limpeza</h3>
+            <div className="mb-4">
+              <span style={{ color: "#00ccf0", fontSize: "40px", fontWeight: 800, lineHeight: 1 }}>1 ano+</span>
+              <span className="block text-sm text-muted-foreground mt-1">de parceria ativa</span>
+            </div>
             <p className="text-muted-foreground leading-relaxed flex-grow">
               Gestão completa de redes sociais, conteúdo estratégico e presença digital estruturada para o maior shopping popular de São Luís.
             </p>
@@ -94,13 +98,13 @@ const Niches = () => (
               </span>
             </div>
             <h3 className="font-heading font-bold text-2xl mb-2">Face Implantes</h3>
-            <div className="flex gap-6 mb-4">
+            <div className="flex flex-wrap items-start gap-x-6 gap-y-4 mb-4">
               <div>
-                <span className="text-3xl md:text-4xl font-extrabold" style={{ color: "#00ccf0", fontWeight: 800 }}>14.700</span>
+                <span className="text-2xl md:text-3xl whitespace-nowrap" style={{ color: "#00ccf0", fontWeight: 800 }}>14.700</span>
                 <span className="block text-sm text-muted-foreground mt-1">seguidores</span>
               </div>
               <div>
-                <span className="text-3xl md:text-4xl font-extrabold" style={{ color: "#00ccf0", fontWeight: 800 }}>Agenda cheia</span>
+                <span className="text-2xl md:text-3xl whitespace-nowrap" style={{ color: "#00ccf0", fontWeight: 800 }}>Agenda cheia</span>
                 <span className="block text-sm text-muted-foreground mt-1">todos os meses</span>
               </div>
             </div>
