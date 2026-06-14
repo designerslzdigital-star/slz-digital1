@@ -4,27 +4,25 @@ import predioImg from "@/assets/predio-marcus-barbosa.png.asset.json";
 
 const Hero = () => {
   return (
-    <section id="inicio" className="relative min-h-screen flex items-center overflow-hidden">
+    <section id="inicio" className="relative min-h-screen">
       {/* Cyan grid overlay */}
       <div
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
           backgroundImage: `linear-gradient(hsl(197 100% 47%) 1px, transparent 1px), linear-gradient(90deg, hsl(197 100% 47%) 1px, transparent 1px)`,
           backgroundSize: "60px 60px",
         }}
       />
 
-      <div className="relative z-10 w-full h-full">
-        <div className="grid lg:grid-cols-2 min-h-screen">
-          {/* Left - Photo */}
-          <div className="hidden lg:block relative h-full">
-            <img
-              src={predioImg.url}
-              alt="Marcus Barbosa | Intelligent Office"
-              className="absolute inset-0 w-full h-full object-cover"
-              style={{ objectPosition: "center top", borderRadius: 0 }}
-            />
-          </div>
+      <div className="relative z-10 w-full min-h-screen grid lg:grid-cols-2">
+        {/* Left - Photo */}
+        <div className="hidden lg:block relative min-h-screen">
+          <img
+            src={predioImg.url}
+            alt="Marcus Barbosa | absolute inset-0 w-full h-full object-cover"
+            style={{ objectPosition: "center top" }}
+          />
+        </div>
 
           {/* Right - Text */}
           <div className="flex items-center px-4 lg:px-12 py-20 lg:py-0">
