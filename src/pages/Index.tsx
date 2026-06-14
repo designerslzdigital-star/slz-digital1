@@ -6,10 +6,10 @@ import PainPoints from "@/components/PainPoints";
 import Services from "@/components/Services";
 import AboutDiego from "@/components/AboutDiego";
 import ClientLogos from "@/components/ClientLogos";
-import Packages from "@/components/Packages";
 import HowItWorks from "@/components/HowItWorks";
-import InstagramFeed from "@/components/InstagramFeed";
 import FinalCTA from "@/components/FinalCTA";
+import Niches from "@/components/Niches";
+import BookingCTA from "@/components/BookingCTA";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import ScrollAnimator from "@/components/ScrollAnimator";
@@ -24,9 +24,9 @@ const Index = () => (
     <ScrollAnimator><Services /></ScrollAnimator>
     <ScrollAnimator><AboutDiego /></ScrollAnimator>
     <ClientLogos />
-    <ScrollAnimator><Packages /></ScrollAnimator>
+    <ScrollAnimator><Niches /></ScrollAnimator>
     <ScrollAnimator><HowItWorks /></ScrollAnimator>
-    <ScrollAnimator><InstagramFeed /></ScrollAnimator>
+    <ScrollAnimator><BookingCTA /></ScrollAnimator>
     <ScrollAnimator><FinalCTA /></ScrollAnimator>
     <Footer />
     <WhatsAppButton />
