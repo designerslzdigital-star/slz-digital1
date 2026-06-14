@@ -27,7 +27,7 @@ const Footer = () => (
         <div>
           <p className="font-heading font-semibold text-sm mb-4">Navegação</p>
           <div className="space-y-2 text-sm text-silver">
-            {["Serviços", "Pacotes", "Portfólio", "Contato"].map((link) => (
+            {["Serviços", "Nichos", "Processo", "Contato"].map((link) => (
               <a key={link} href={`#${link.toLowerCase()}`} className="block hover:text-foreground transition-colors">
                 {link}
               </a>
