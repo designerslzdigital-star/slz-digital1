@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { MessageCircle, GraduationCap, Globe, Building2, TrendingUp } from "lucide-react";
-import diegoImg from "@/assets/diego.png";
+import diegoImg from "@/assets/diego-barbosa.png.asset.json";
 
 const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=5598982990007&text=Olá%2C%20vim%20do%20site%20SLZ%20Digital.";
 
