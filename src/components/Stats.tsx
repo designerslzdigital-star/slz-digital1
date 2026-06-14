@@ -1,8 +1,8 @@
 const stats = [
   { value: "8 Anos", label: "de mercado" },
-  { value: "10+", label: "clientes ativos" },
+  { value: "97+", label: "clientes atendidos" },
+  { value: "R$ 2M+", label: "em campanhas gerenciadas" },
   { value: "São Luís, MA", label: "localização" },
-  { value: "Social + Tráfego + Vídeo + IA", label: "serviços integrados" },
 ];
 
 const Stats = () => (
