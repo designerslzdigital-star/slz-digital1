@@ -72,27 +72,7 @@ const AboutDiego = () => (
             Diego é administrador de formação e especialista em marketing digital. Viveu 5 anos no exterior, onde acumulou experiência internacional e atuou com empresas multinacionais. Com 8 anos à frente da SLZ Digital, formação em Administração e Marketing Digital lidera uma equipe focada em resultados reais para negócios locais e regionais que querem crescer de verdade no digital.
           </p>
 
-          <div
-            className="rounded-xl p-6"
-            style={{
-              backgroundColor: "#161616",
-              border: "1px solid rgba(255,255,255,0.08)",
-            }}
-          >
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              {highlights.map((item, i) => (
-                <div key={i} className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "rgba(0,204,240,0.12)" }}>
-                    <item.icon className="w-5 h-5" style={{ color: "#00ccf0" }} />
-                  </div>
-                  <div>
-                    <p className="text-sm font-bold text-white leading-snug">{item.title}</p>
-                    <p className="text-xs mt-1" style={{ color: "#888" }}>{item.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+
 
           <Button variant="cyan" size="lg" className="w-full" asChild>
             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
