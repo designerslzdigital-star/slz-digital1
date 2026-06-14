@@ -26,6 +26,7 @@ const Index = () => (
     <ClientLogos />
     <ScrollAnimator><Niches /></ScrollAnimator>
     <ScrollAnimator><HowItWorks /></ScrollAnimator>
+    <ScrollAnimator><FAQ /></ScrollAnimator>
     <ScrollAnimator><BookingCTA /></ScrollAnimator>
     <Footer />
     <WhatsAppButton />
