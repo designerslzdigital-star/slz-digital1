@@ -26,7 +26,18 @@ const ClientLogos = () => {
   const allClients = [...clients, ...clients];
 
   return (
-    <section id="portfolio" className="py-16">
+    <section
+      id="portfolio"
+      className="py-16"
+      style={{
+        background: "rgba(255,255,255,0.03)",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
+        borderTop: "1px solid rgba(255,255,255,0.08)",
+        borderBottom: "1px solid rgba(255,255,255,0.08)",
+        boxShadow: "inset 0 1px 0 rgba(255,255,255,0.05), inset 0 -1px 0 rgba(255,255,255,0.05)",
+      }}
+    >
       <div className="container mx-auto px-4 mb-8">
         <p className="text-center text-sm text-silver font-heading">
           Empresas que confiam na SLZ Digital
