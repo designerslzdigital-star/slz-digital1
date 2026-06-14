@@ -8,7 +8,7 @@ const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=5598982990007&text=Ol�
 const navLinks = [
   { label: "Início", href: "#inicio" },
   { label: "Serviços", href: "#servicos" },
-  { label: "Nichos", href: "#nichos" },
+  { label: "Cases", href: "#nichos" },
   { label: "Processo", href: "#processo" },
   { label: "Sobre", href: "#sobre" },
   { label: "Contato", href: "#contato" },
