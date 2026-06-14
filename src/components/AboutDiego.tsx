@@ -6,7 +6,7 @@ const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=5598982990007&text=Ol√
 
 const badges = [
   { value: "8 Anos", label: "de mercado" },
-  { value: "10+", label: "clientes ativos" },
+  { value: "97+", label: "clientes atendidos" },
   { value: "Exp.", label: "Internacional" },
 ];
 
