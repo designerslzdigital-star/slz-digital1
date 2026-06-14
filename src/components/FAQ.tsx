@@ -13,7 +13,6 @@ const faqs = [
       "Não exigimos fidelidade forçada. Acreditamos que cliente satisfeito não precisa de contrato para ficar. Trabalhamos com ciclos mensais e você acompanha os resultados de perto desde o primeiro mês.",
   },
   {
-    question: sup: 12,
     question: "Quanto tempo até começar a ver resultado?",
     answer:
       "Depende do serviço. Tráfego pago pode gerar resultado nas primeiras semanas. Social media constrói autoridade em 60 a 90 dias. O que garantimos é transparência total durante o processo — relatório mensal sem enrolação.",
