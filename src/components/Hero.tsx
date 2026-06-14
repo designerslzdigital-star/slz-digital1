@@ -16,10 +16,11 @@ const Hero = () => {
 
       <div className="relative z-10 w-full min-h-screen grid lg:grid-cols-2">
         {/* Left - Photo */}
-        <div className="hidden lg:block relative min-h-screen">
+        <div className="hidden lg:block relative min-h-screen overflow-visible">
           <img
             src={predioImg.url}
-            alt="Marcus Barbosa | absolute inset-0 w-full h-full object-cover"
+            alt="Marcus Barbosa | Intelligent Office"
+            className="absolute top-0 left-0 w-full h-full object-cover"
             style={{ objectPosition: "center top" }}
           />
         </div>

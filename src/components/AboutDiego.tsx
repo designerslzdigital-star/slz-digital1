@@ -55,9 +55,7 @@ const AboutDiego = () => (
             <span className="text-primary">expertise e resultado</span>
           </h2>
           <p className="text-muted-foreground leading-relaxed">
-            Diego é administrador de formação e especialista em marketing digital. Com 8 anos à frente
-            da SLZ Digital, experiência internacional e uma rede de contatos sólida em São Luís, ele
-            lidera uma equipe especializada em resultados reais para empresas locais e regionais.
+            Diego é administrador de formação e especialista em marketing digital. Viveu 5 anos no exterior, onde acumulou experiência internacional e atuou com empresas multinacionais. Com 8 anos à frente da SLZ Digital, formação em Administração e Marketing Digital lidera uma equipe focada em resultados reais para negócios locais e regionais que querem crescer de verdade no digital.
           </p>
 
           <div className="bg-surface rounded-xl p-6 space-y-3">
