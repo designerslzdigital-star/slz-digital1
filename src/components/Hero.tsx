@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MapPin } from "lucide-react";
-import diegoImg from "@/assets/diego.png";
+import predioImg from "@/assets/predio-marcus-barbosa.png.asset.json";
 
 const Hero = () => {
   return (
@@ -19,7 +19,7 @@ const Hero = () => {
           {/* Left - Photo */}
           <div className="hidden lg:flex justify-center">
             <div className="relative w-full max-w-md aspect-[3/4] rounded-2xl overflow-hidden">
-              <img src={diegoImg} alt="Diego - Fundador SLZ Digital" className="w-full h-full object-cover object-top" />
+              <img src={predioImg.url} alt="Marcus Barbosa | Intelligent Office" className="w-full h-full object-cover object-[center_top]" />
             </div>
           </div>
 
