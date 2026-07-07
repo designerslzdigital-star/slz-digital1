@@ -1,20 +1,68 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { X, Check, Loader2, Video } from "lucide-react";
+import { X, Check, Loader2, Video, Send } from "lucide-react";
 import slzLogo from "@/assets/slz-logo.png";
 import { supabase } from "@/integrations/supabase/client";
 import { FunctionsHttpError } from "@supabase/supabase-js";
 
 type Slot = { time: string; iso: string };
 type Day = { date: string; label: string; slots: Slot[] };
-type Form = { nome: string; empresa: string; email: string; telefone: string; observacoes: string };
+type Form = { empresa: string; email: string; observacoes: string };
 
-const emptyForm: Form = { nome: "", empresa: "", email: "", telefone: "", observacoes: "" };
+const emptyForm: Form = { empresa: "", email: "", observacoes: "" };
+
+type ChatStep = {
+  id: "nome" | "segmento" | "desafio" | "investe" | "telefone";
+  question: string;
+  type: "text" | "choice";
+  options?: string[];
+  placeholder?: string;
+};
+
+const chatSteps: ChatStep[] = [
+  { id: "nome", question: "Pra começar, qual é o seu nome completo?", type: "text", placeholder: "Digite seu nome" },
+  {
+    id: "segmento",
+    question: "Qual é o seu segmento de atuação?",
+    type: "choice",
+    options: ["Saúde", "Jurídico/Consultoria", "Turismo/Eventos", "Varejo", "Arquitetura/Design", "Outro"],
+  },
+  {
+    id: "desafio",
+    question: "Qual o seu maior desafio hoje?",
+    type: "choice",
+    options: [
+      "Presença fraca nas redes",
+      "Marketing sem retorno",
+      "Poucos clientes qualificados",
+      "Marca sem identidade",
+      "Quero usar IA",
+    ],
+  },
+  {
+    id: "investe",
+    question: "Você já investe em marketing?",
+    type: "choice",
+    options: ["Sim, sem resultado", "Sim, com resultado parcial", "Nunca investi", "Já tive agência e parei"],
+  },
+  { id: "telefone", question: "Qual o melhor WhatsApp para confirmação?", type: "text", placeholder: "(98) 99999-9999" },
+];
+
+type Msg = { from: "bot" | "user"; text: string };
+type Answers = Partial<Record<ChatStep["id"], string>>;
 
 export default function BookingChat({ onClose }: { onClose: () => void }) {
-  const [step, setStep] = useState<"slot" | "form" | "done">("slot");
+  const [step, setStep] = useState<"chat" | "slot" | "form" | "done">("chat");
+
+  // Chat state
+  const [chatIdx, setChatIdx] = useState(0);
+  const [answers, setAnswers] = useState<Answers>({});
+  const [messages, setMessages] = useState<Msg[]>([{ from: "bot", text: chatSteps[0].question }]);
+  const [input, setInput] = useState("");
+
+  // Slot/form state
   const [days, setDays] = useState<Day[] | null>(null);
-  const [loadingSlots, setLoadingSlots] = useState(true);
+  const [loadingSlots, setLoadingSlots] = useState(false);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedSlot, setSelectedSlot] = useState<Slot | null>(null);
@@ -35,36 +83,57 @@ export default function BookingChat({ onClose }: { onClose: () => void }) {
   }, [onClose]);
 
   useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      setLoadingSlots(true);
-      setLoadError(null);
-      const { data, error } = await supabase.functions.invoke("calendar-availability", {
-        body: {},
-      });
-      if (cancelled) return;
-      if (error) {
-        const details = error instanceof FunctionsHttpError ? await error.context.text() : error.message;
-        console.error("availability failed:", details);
-        setLoadError("Não foi possível carregar os horários. Tente novamente em instantes.");
-        setLoadingSlots(false);
-        return;
-      }
-      const list = (data?.days ?? []) as Day[];
-      setDays(list);
-      if (list[0]) setSelectedDate(list[0].date);
+    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
+  }, [messages, step]);
+
+  const loadAvailability = async () => {
+    setLoadingSlots(true);
+    setLoadError(null);
+    const { data, error } = await supabase.functions.invoke("calendar-availability", { body: {} });
+    if (error) {
+      const details = error instanceof FunctionsHttpError ? await error.context.text() : error.message;
+      console.error("availability failed:", details);
+      setLoadError("Não foi possível carregar os horários. Tente novamente em instantes.");
       setLoadingSlots(false);
-    })();
-    return () => { cancelled = true; };
-  }, []);
+      return;
+    }
+    const list = (data?.days ?? []) as Day[];
+    setDays(list);
+    if (list[0]) setSelectedDate(list[0].date);
+    setLoadingSlots(false);
+  };
+
+  const advanceChat = (userText: string) => {
+    const current = chatSteps[chatIdx];
+    setAnswers((a) => ({ ...a, [current.id]: userText }));
+    setMessages((m) => [...m, { from: "user", text: userText }]);
+    const next = chatIdx + 1;
+    setTimeout(() => {
+      if (next < chatSteps.length) {
+        setMessages((m) => [...m, { from: "bot", text: chatSteps[next].question }]);
+        setChatIdx(next);
+      } else {
+        setMessages((m) => [...m, {
+          from: "bot",
+          text: "Perfeito! Agora escolha o melhor dia e horário para a sua call de 30 min com Google Meet.",
+        }]);
+        setStep("slot");
+        if (!days) loadAvailability();
+      }
+    }, 350);
+  };
+
+  const handleSend = () => {
+    if (!input.trim()) return;
+    advanceChat(input.trim());
+    setInput("");
+  };
 
   const activeDay = days?.find((d) => d.date === selectedDate) ?? null;
 
   const validateForm = (): string | null => {
-    if (!form.nome.trim() || form.nome.trim().length < 2) return "Informe seu nome completo.";
     if (!form.empresa.trim()) return "Informe o nome da empresa.";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) return "Informe um e-mail válido.";
-    if (form.telefone.replace(/\D/g, "").length < 10) return "Informe um telefone válido.";
     if (!selectedSlot) return "Selecione um horário.";
     return null;
   };
@@ -74,13 +143,20 @@ export default function BookingChat({ onClose }: { onClose: () => void }) {
     if (err) { setSubmitError(err); return; }
     setSubmitError(null);
     setSubmitting(true);
+    const observacoesCompletas = [
+      form.observacoes.trim(),
+      `Segmento: ${answers.segmento ?? "—"}`,
+      `Desafio: ${answers.desafio ?? "—"}`,
+      `Investimento atual: ${answers.investe ?? "—"}`,
+    ].filter(Boolean).join("\n");
+
     const { data, error } = await supabase.functions.invoke("calendar-book", {
       body: {
-        nome: form.nome.trim(),
+        nome: (answers.nome ?? "").trim(),
         empresa: form.empresa.trim(),
         email: form.email.trim(),
-        telefone: form.telefone.trim(),
-        observacoes: form.observacoes.trim(),
+        telefone: (answers.telefone ?? "").trim(),
+        observacoes: observacoesCompletas,
         startIso: selectedSlot!.iso,
       },
     });
@@ -109,6 +185,15 @@ export default function BookingChat({ onClose }: { onClose: () => void }) {
 
   const cardStyle = { background: "#111111", border: "1px solid rgba(0,204,240,0.12)" } as const;
   const inputStyle = { background: "#0e0e0e", border: "1px solid #222", color: "#fff" } as const;
+  const currentChat = chatSteps[chatIdx];
+
+  const progressSteps = 3; // chat, slot, form
+  const progressIdx =
+    step === "chat" ? (chatIdx / chatSteps.length) :
+    step === "slot" ? 1 + (selectedSlot ? 0.5 : 0) :
+    step === "form" ? 2 :
+    3;
+  const progress = Math.min(100, (progressIdx / progressSteps) * 100);
 
   return createPortal(
     <div
@@ -140,8 +225,43 @@ export default function BookingChat({ onClose }: { onClose: () => void }) {
         </button>
       </div>
 
+      {/* Progress */}
+      <div className="h-1 w-full" style={{ background: "#161616" }}>
+        <div
+          className="h-full transition-all duration-500"
+          style={{ width: `${progress}%`, background: "#00ccf0", boxShadow: "0 0 10px #00ccf0" }}
+        />
+      </div>
+
       <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 md:px-6 py-8">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-2xl mx-auto">
+          {step === "chat" && (
+            <div className="flex flex-col gap-4">
+              {messages.map((m, i) => (
+                <div key={i} className={`flex ${m.from === "user" ? "justify-end" : "justify-start"}`}>
+                  {m.from === "bot" && (
+                    <div
+                      className="w-9 h-9 rounded-full mr-2 flex-shrink-0 flex items-center justify-center"
+                      style={{ background: "#111111", border: "1px solid rgba(0,204,240,0.12)" }}
+                    >
+                      <img src={slzLogo} alt="" className="w-5 h-5 object-contain" />
+                    </div>
+                  )}
+                  <div
+                    className="max-w-[80%] px-4 py-3 rounded-2xl text-sm md:text-base"
+                    style={
+                      m.from === "bot"
+                        ? { background: "#111111", border: "1px solid rgba(0,204,240,0.12)", color: "#fff" }
+                        : { background: "#00ccf0", color: "#000", fontWeight: 500 }
+                    }
+                  >
+                    {m.text}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
           {step === "slot" && (
             <div>
               <h2 className="text-2xl md:text-3xl font-heading font-bold text-white mb-2">
@@ -216,7 +336,7 @@ export default function BookingChat({ onClose }: { onClose: () => void }) {
           {step === "form" && selectedSlot && (
             <div>
               <h2 className="text-2xl md:text-3xl font-heading font-bold text-white mb-2">
-                Seus dados
+                Últimos detalhes, {(answers.nome ?? "").split(" ")[0]}
               </h2>
               <p className="text-silver mb-6 text-sm">
                 Horário selecionado:{" "}
@@ -233,16 +353,6 @@ export default function BookingChat({ onClose }: { onClose: () => void }) {
               </p>
 
               <div className="rounded-2xl p-5 md:p-6 space-y-4" style={cardStyle}>
-                <Field label="Nome completo">
-                  <input
-                    value={form.nome}
-                    onChange={(e) => setForm({ ...form, nome: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl outline-none placeholder:text-silver/50"
-                    style={inputStyle}
-                    placeholder="Como devemos te chamar"
-                    maxLength={120}
-                  />
-                </Field>
                 <Field label="Empresa">
                   <input
                     value={form.empresa}
@@ -253,29 +363,17 @@ export default function BookingChat({ onClose }: { onClose: () => void }) {
                     maxLength={160}
                   />
                 </Field>
-                <div className="grid md:grid-cols-2 gap-4">
-                  <Field label="E-mail">
-                    <input
-                      type="email"
-                      value={form.email}
-                      onChange={(e) => setForm({ ...form, email: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl outline-none placeholder:text-silver/50"
-                      style={inputStyle}
-                      placeholder="voce@empresa.com"
-                      maxLength={200}
-                    />
-                  </Field>
-                  <Field label="Telefone">
-                    <input
-                      value={form.telefone}
-                      onChange={(e) => setForm({ ...form, telefone: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl outline-none placeholder:text-silver/50"
-                      style={inputStyle}
-                      placeholder="(98) 99999-9999"
-                      maxLength={40}
-                    />
-                  </Field>
-                </div>
+                <Field label="E-mail (para receber o convite)">
+                  <input
+                    type="email"
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    className="w-full px-4 py-3 rounded-xl outline-none placeholder:text-silver/50"
+                    style={inputStyle}
+                    placeholder="voce@empresa.com"
+                    maxLength={200}
+                  />
+                </Field>
                 <Field label="Observações (opcional)">
                   <textarea
                     value={form.observacoes}
@@ -312,7 +410,7 @@ export default function BookingChat({ onClose }: { onClose: () => void }) {
                 <Check className="w-7 h-7 text-black" />
               </div>
               <h3 className="font-heading font-bold text-2xl text-white mb-2">
-                Call agendada!
+                Call agendada, {(answers.nome ?? "").split(" ")[0]}!
               </h3>
               <p className="text-silver mb-2 text-sm">
                 Enviamos o convite para <span className="text-white">{form.email}</span>.
@@ -338,6 +436,48 @@ export default function BookingChat({ onClose }: { onClose: () => void }) {
           )}
         </div>
       </div>
+
+      {/* Chat composer */}
+      {step === "chat" && (
+        <div className="border-t px-4 md:px-0 py-4" style={{ borderColor: "#1a1a1a" }}>
+          <div className="max-w-2xl mx-auto">
+            {currentChat?.type === "choice" ? (
+              <div className="flex flex-wrap gap-2 justify-center">
+                {currentChat.options!.map((opt) => (
+                  <button
+                    key={opt}
+                    onClick={() => advanceChat(opt)}
+                    className="px-4 py-2 rounded-full text-sm font-medium transition-all hover:scale-[1.02]"
+                    style={{ background: "#111111", border: "1px solid rgba(0,204,240,0.12)", color: "#fff" }}
+                  >
+                    {opt}
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <div className="flex gap-2 items-center">
+                <input
+                  autoFocus
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && handleSend()}
+                  placeholder={currentChat?.placeholder}
+                  className="flex-1 px-4 py-3 rounded-xl outline-none text-white placeholder:text-silver/50"
+                  style={{ background: "#111111", border: "1px solid rgba(0,204,240,0.12)" }}
+                />
+                <button
+                  onClick={handleSend}
+                  className="w-12 h-12 rounded-xl flex items-center justify-center transition-transform hover:scale-105"
+                  style={{ background: "#00ccf0" }}
+                  aria-label="Enviar"
+                >
+                  <Send className="w-5 h-5 text-black" />
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>,
     document.body,
   );
