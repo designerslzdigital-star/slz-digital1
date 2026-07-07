@@ -8,6 +8,9 @@ import pagcarro from "@/assets/clients/pagcarro.png";
 import taguatur from "@/assets/clients/taguatur.png";
 import editoraInternacional from "@/assets/clients/editora-internacional.png";
 import decanter from "@/assets/clients/decanter.png";
+import aruaAsset from "@/assets/clients/arua.png.asset.json";
+import acmAsset from "@/assets/clients/acm.png.asset.json";
+import uniflexAsset from "@/assets/clients/uniflex.png.asset.json";
 
 const clients = [
   { name: "Shopping da Limpeza", logo: shoppingLimpeza },
@@ -20,6 +23,9 @@ const clients = [
   { name: "Taguatur", logo: taguatur },
   { name: "Editora Internacional", logo: editoraInternacional },
   { name: "Decanter", logo: decanter },
+  { name: "Aruá", logo: aruaAsset.url },
+  { name: "ACM Comércio e Equipamentos", logo: acmAsset.url },
+  { name: "Uniflex Móveis para Escritório", logo: uniflexAsset.url },
 ];
 
 const ClientLogos = () => {
