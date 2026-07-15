@@ -14,7 +14,7 @@ const services = [
   {
     icon: Video,
     title: "Produção de Vídeo Profissional",
-    description: "Vídeos profissionais que geram autoridade, alcance e conversão.",
+    description: "Vídeos profissionais que geram autoridade, alcance e vendas.",
   },
   {
     icon: PenTool,
@@ -28,8 +28,8 @@ const services = [
   },
   {
     icon: Brain,
-    title: "Estratégia com IA",
-    description: "Inteligência artificial aplicada ao marketing do seu negócio.",
+    title: "IA e Automação para Empresas",
+    description: "Automatize processos, atendimento, vendas e gestão com IA, CRM, SDR inteligente, geração de leads e sistemas personalizados.",
   },
   {
     icon: Lightbulb,

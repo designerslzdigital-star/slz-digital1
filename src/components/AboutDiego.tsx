@@ -5,7 +5,7 @@ import diegoImg from "@/assets/diego-barbosa.png.asset.json";
 const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=5598982990007&text=Olá%2C%20vim%20do%20site%20SLZ%20Digital.";
 
 const badges = [
-  { value: "8 Anos", label: "de mercado" },
+  { value: "9 Anos", label: "de mercado" },
   { value: "97+", label: "clientes atendidos" },
   { value: "Exp.", label: "Internacional" },
 ];
@@ -28,8 +28,8 @@ const highlights = [
   },
   {
     icon: TrendingUp,
-    title: "8 Anos à Frente da SLZ Digital",
-    desc: "Liderando resultados reais para negócios locais e regionais",
+    title: "Há 9 anos à frente da SLZ Digital",
+    desc: "Liderando resultados reais para empresas de pequeno, médio e grande porte",
   },
 ];
 
@@ -69,7 +69,7 @@ const AboutDiego = () => (
             <span className="text-primary">expertise e resultado</span>
           </h2>
           <p className="text-muted-foreground leading-relaxed">
-            Diego é administrador de formação e especialista em marketing digital. Viveu 5 anos no exterior, onde acumulou experiência internacional e atuou com empresas multinacionais. Com 8 anos à frente da SLZ Digital, formação em Administração e Marketing Digital lidera uma equipe focada em resultados reais para negócios locais e regionais que querem crescer de verdade no digital.
+            Diego é administrador de empresas, empresário, especialista em marketing e vendas. Viveu por 5 anos no exterior, onde acumulou experiência internacional e atuou em empresas multinacionais, como a PwC e a Tata Consultancy Services. Há 9 anos à frente da SLZ Digital, lidera uma equipe focada em gerar resultados reais para empresas de pequeno, médio e grande porte.
           </p>
 
 
