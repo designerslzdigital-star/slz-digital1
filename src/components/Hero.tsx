@@ -46,7 +46,7 @@ const Hero = () => {
 
               <p className="text-muted-foreground text-lg leading-relaxed">
                 Somos especialistas em transformar negócios locais em referências digitais.
-                Social media, tráfego pago, vídeo e estratégia — tudo integrado, tudo com resultado.
+                Social media, tráfego pago, vídeo, estratégia e automações com IA — tudo integrado, tudo com resultado.
               </p>
 
               <div className="flex flex-wrap gap-4">

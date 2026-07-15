@@ -4,7 +4,7 @@ const steps = [
   { icon: Search, title: "Diagnóstico", sub: "Entendimento" },
   { icon: Target, title: "Estratégia", sub: "Planejamento" },
   { icon: Zap, title: "Execução", sub: "Ação" },
-  { icon: TrendingUp, title: "Resultados", sub: "Crescimento" },
+  { icon: TrendingUp, title: "Resultados", sub: "VENDAS" },
 ];
 
 const HowItWorks = () => (
