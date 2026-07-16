@@ -40,8 +40,8 @@ const Hero = () => {
               </div>
 
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold leading-tight">
-                Sua empresa merece ser{" "}
-                <span className="text-primary">vista e lembrada.</span>
+                Ajudamos empreendedores a&nbsp;
+                <span className="text-primary">vender todos os dias através da internet.</span>
               </h1>
 
               <p className="text-muted-foreground text-lg leading-relaxed">
