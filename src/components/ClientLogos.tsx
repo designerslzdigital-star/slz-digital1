@@ -1,4 +1,4 @@
-import shoppingLimpeza from "@/assets/clients/shopping-limpeza.png";
+import shoppingLimpezaAsset from "@/assets/clients/shopping-limpeza.png.asset.json";
 import genialConsultoria from "@/assets/clients/genial-consultoria.png";
 import viaTaxi from "@/assets/clients/via-taxi.png";
 import uarauTour from "@/assets/clients/uarau-tour.png";
@@ -13,7 +13,7 @@ import acmAsset from "@/assets/clients/acm.png.asset.json";
 import uniflexAsset from "@/assets/clients/uniflex.png.asset.json";
 
 const clients = [
-  { name: "Shopping da Limpeza", logo: shoppingLimpeza },
+  { name: "Shopping da Limpeza", logo: shoppingLimpezaAsset.url },
   { name: "Genial Consultoria", logo: genialConsultoria },
   { name: "Via Táxi Aéreo", logo: viaTaxi },
   { name: "Uarau Tour", logo: uarauTour },
@@ -52,20 +52,28 @@ const ClientLogos = () => {
       <div className="overflow-hidden marquee-mask">
         <div className="animate-marquee-slow whitespace-nowrap inline-flex items-center gap-12">
           {allClients.map((client, i) => (
-            <img
+            <div
               key={i}
-              src={client.logo}
-              alt={client.name}
-              className="h-10 w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity flex-shrink-0"
-            />
+              className="flex items-center justify-center h-16 w-36 flex-shrink-0"
+            >
+              <img
+                src={client.logo}
+                alt={client.name}
+                className="max-h-full max-w-full object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity"
+              />
+            </div>
           ))}
           {allClients.map((client, i) => (
-            <img
+            <div
               key={`dup-${i}`}
-              src={client.logo}
-              alt={client.name}
-              className="h-10 w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity flex-shrink-0"
-            />
+              className="flex items-center justify-center h-16 w-36 flex-shrink-0"
+            >
+              <img
+                src={client.logo}
+                alt={client.name}
+                className="max-h-full max-w-full object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity"
+              />
+            </div>
           ))}
         </div>
       </div>
