@@ -77,7 +77,7 @@ const Footer = () => (
       </div>
 
       <div className="border-t border-border mt-8 pt-8 text-center text-xs text-silver">
-        © 2025 SLZ Digital. Todos os direitos reservados.
+        © 2025 SLZ Digital. Todos os direitos reservados. A melhor agencia de marketing de São Luís - MA. Agencia de Marketing Digital.
       </div>
     </div>
   </footer>
