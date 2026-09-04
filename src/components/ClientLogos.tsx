@@ -29,6 +29,9 @@ const clients = [
   { name: "Aruá", logo: aruaAsset.url },
   { name: "ACM Comércio e Equipamentos", logo: acmAsset.url },
   { name: "Uniflex Móveis para Escritório", logo: uniflexAsset.url },
+  { name: "Alta Branco", logo: logoAltaBranco.url },
+  { name: "Vivenciar", logo: vivenciarLogo.url },
+  { name: "Cliente", logo: logoCliente3.url },
 ];
 
 const ClientLogos = () => {
