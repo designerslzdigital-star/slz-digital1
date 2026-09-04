@@ -11,6 +11,9 @@ import decanter from "@/assets/clients/decanter.png";
 import aruaAsset from "@/assets/clients/arua.png.asset.json";
 import acmAsset from "@/assets/clients/acm.png.asset.json";
 import uniflexAsset from "@/assets/clients/uniflex.png.asset.json";
+import logoAltaBranco from "@/assets/clients/logo-alta-branco.png.asset.json";
+import vivenciarLogo from "@/assets/clients/vivenciar-logo.png.asset.json";
+import logoCliente3 from "@/assets/clients/logo-cliente-3.png.asset.json";
 
 const clients = [
   { name: "Shopping da Limpeza", logo: shoppingLimpezaAsset.url },
