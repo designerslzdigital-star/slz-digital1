@@ -179,6 +179,7 @@ export default function BookingChat({ onClose }: { onClose: () => void }) {
       timeZone: "America/Sao_Paulo",
     });
     setConfirmation({ meetLink: data?.meetLink ?? null, when: whenLabel });
+    fbqTrack("Lead");
     setStep("done");
   };
 
