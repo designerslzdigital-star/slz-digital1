@@ -30,10 +30,10 @@ const Navbar = () => {
         scrolled ? "bg-background/90 backdrop-blur-xl border-b border-border" : "bg-transparent backdrop-blur-sm"
       }`}
     >
-      <div className="container mx-auto flex items-center justify-between h-16 px-4 lg:px-8">
+      <div className="container mx-auto flex items-center justify-between h-20 lg:h-24 px-4 lg:px-8">
         {/* Logo */}
-        <a href="#inicio" className="flex items-center">
-          <img src={slzLogo.url} alt="SLZ Digital" className="h-14 w-auto" />
+        <a href="#inicio" className="flex shrink-0 items-center">
+          <img src={slzLogo.url} alt="SLZ Digital" className="w-48 sm:w-56 lg:w-64 h-auto object-contain" />
         </a>
 
         {/* Desktop Nav */}
