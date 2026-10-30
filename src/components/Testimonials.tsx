@@ -15,6 +15,7 @@ const Testimonials = () => (
         {[
           { src: "https://www.youtube.com/embed/ZgSan0-SEog", name: "Shopping da Limpeza", segment: "Varejo" },
           { src: "https://www.youtube.com/embed/_O1eJPMhMVs", name: "Genial Consultoria", segment: "Consultoria" },
+          { src: "https://www.youtube.com/embed/It1tOy7ghEM", name: "Via Táxi Aéreo", segment: "Transporte" },
         ].map((t) => (
           <div
             key={t.name}
