@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, MessageCircle } from "lucide-react";
-import slzLogo from "@/assets/slz-logo.png";
+import slzLogo from "@/assets/slz-logo.png.asset.json";
 
 const WHATSAPP_URL = "https://api.whatsapp.com/send?phone=5598982990007&text=Olá%2C%20vim%20do%20site%20SLZ%20Digital.";
 
