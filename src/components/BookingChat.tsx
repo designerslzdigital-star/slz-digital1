@@ -4,6 +4,7 @@ import { X, Check, Loader2, Video, Send } from "lucide-react";
 import slzLogo from "@/assets/slz-logo.png";
 import { supabase } from "@/integrations/supabase/client";
 import { FunctionsHttpError } from "@supabase/supabase-js";
+import { fbqTrack } from "@/lib/fbq";
 
 type Slot = { time: string; iso: string };
 type Day = { date: string; label: string; slots: Slot[] };
