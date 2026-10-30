@@ -8,7 +8,7 @@ const Footer = () => (
         {/* Logo */}
         <div>
           <a href="#inicio" className="flex items-center mb-4">
-            <img src={slzLogo} alt="SLZ Digital" className="h-8 w-auto" />
+            <img src={slzLogo.url} alt="SLZ Digital" className="h-8 w-auto" />
           </a>
           <div className="space-y-2 text-sm text-silver">
             <a

@@ -213,7 +213,7 @@ export default function BookingChat({ onClose }: { onClose: () => void }) {
       {/* Top bar */}
       <div className="flex items-center justify-between px-4 md:px-8 py-4 border-b" style={{ borderColor: "#1a1a1a" }}>
         <div className="flex items-center gap-3">
-          <img src={slzLogo} alt="SLZ Digital" className="h-8 w-auto" />
+          <img src={slzLogo.url} alt="SLZ Digital" className="h-8 w-auto" />
           <span className="hidden sm:inline text-xs uppercase tracking-[0.25em] text-silver">
             Agendar call comercial
           </span>
@@ -246,7 +246,7 @@ export default function BookingChat({ onClose }: { onClose: () => void }) {
                       className="w-9 h-9 rounded-full mr-2 flex-shrink-0 flex items-center justify-center"
                       style={{ background: "#111111", border: "1px solid rgba(0,204,240,0.12)" }}
                     >
-                      <img src={slzLogo} alt="" className="w-5 h-5 object-contain" />
+                      <img src={slzLogo.url} alt="" className="w-9 h-9 object-cover object-left" />
                     </div>
                   )}
                   <div
