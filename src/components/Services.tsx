@@ -28,8 +28,8 @@ const services = [
   },
   {
     icon: Brain,
-    title: "IA e Automação para Empresas",
-    description: "Automatize processos, atendimento, vendas e gestão com IA, CRM, SDR inteligente, geração de leads e sistemas personalizados.",
+    title: "Desenvolvimento de Software, Sistemas e SaaS",
+    description: "Criamos e desenvolvemos softwares sob medida, sistemas de gestão, CRM e plataformas SaaS. Automatizamos processos e integramos dados para aumentar a produtividade, aumentar vendas e acompanhar métricas, ajudando sua empresa a crescer com organização e previsibilidade.",
   },
   {
     icon: Lightbulb,
