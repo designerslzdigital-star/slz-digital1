@@ -11,7 +11,8 @@ const Testimonials = () => (
         Resultados reais contados por quem viveu.
       </p>
 
-      <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto items-start">
+
         {[
           { src: "https://www.youtube.com/embed/ZgSan0-SEog", name: "Shopping da Limpeza", segment: "Varejo" },
           { src: "https://www.youtube.com/embed/_O1eJPMhMVs", name: "Genial Consultoria", segment: "Consultoria" },
