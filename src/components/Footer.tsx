@@ -18,7 +18,7 @@ const Footer = () => (
               className="flex items-start gap-2 hover:text-foreground transition-colors"
             >
               <MapPin className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-              <span>Marcus Barbosa | Intelligent Office, Av. dos Holandeses, 6916 - Calhau, São Luís — MA, 65071-380</span>
+              <span>Marcus Barbosa | Intelligent Office, Sala 115, Av. dos Holandeses, 6916 - Calhau, São Luís — MA, 65071-380</span>
             </a>
           </div>
         </div>
