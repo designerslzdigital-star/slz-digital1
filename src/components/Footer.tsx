@@ -1,5 +1,5 @@
 import { MapPin, Phone, Instagram } from "lucide-react";
-import slzLogo from "@/assets/slz-logo.png";
+import slzLogo from "@/assets/slz-logo.png.asset.json";
 
 const Footer = () => (
   <footer className="border-t border-border py-12">
@@ -8,7 +8,7 @@ const Footer = () => (
         {/* Logo */}
         <div>
           <a href="#inicio" className="flex items-center mb-4">
-            <img src={slzLogo} alt="SLZ Digital" className="h-8 w-auto" />
+            <img src={slzLogo.url} alt="SLZ Digital" className="h-8 w-auto" />
           </a>
           <div className="space-y-2 text-sm text-silver">
             <a
