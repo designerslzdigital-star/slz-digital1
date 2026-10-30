@@ -1,5 +1,5 @@
 import { MapPin, Phone, Instagram } from "lucide-react";
-import slzLogo from "@/assets/slz-logo.png";
+import slzLogo from "@/assets/slz-logo.png.asset.json";
 
 const Footer = () => (
   <footer className="border-t border-border py-12">

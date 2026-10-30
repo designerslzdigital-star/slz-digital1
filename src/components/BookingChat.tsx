@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { X, Check, Loader2, Video, Send } from "lucide-react";
-import slzLogo from "@/assets/slz-logo.png";
+import slzLogo from "@/assets/slz-logo.png.asset.json";
 import { supabase } from "@/integrations/supabase/client";
 import { FunctionsHttpError } from "@supabase/supabase-js";
 import { fbqTrack } from "@/lib/fbq";
