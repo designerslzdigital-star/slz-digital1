@@ -77,7 +77,7 @@ const Footer = () => (
       </div>
 
       <div className="border-t border-border mt-8 pt-8 text-center text-xs text-silver">
-        © 2025 SLZ Digital. Todos os direitos reservados. In Jesus We Trust, A melhor agencia de marketing de São Luís - MA. Agencia de Marketing Digital. CNPJ:29746940000106
+        © 2025 SLZ Digital. Todos os direitos reservados. In Jesus We Trust, A melhor agencia de marketing de São Luís - MA. Agencia de Marketing Médico, Marketing Clinico Agencia de Marketing Digital. CNPJ:29746940000106
       </div>
     </div>
   </footer>
