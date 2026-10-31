@@ -4,3 +4,4 @@
 
 ## Booking
 - Build the WhatsApp booking message in the shared booking helper so dates use the calendar's São Paulo timezone and message encoding preserves line breaks.
+- Capture booking requests through a server-only lead insertion function with a stable submission ID; keep leads inaccessible to visitors and keep Calendar access read-only.

@@ -74,6 +74,7 @@ export default function BookingChat({ onClose }: { onClose: () => void }) {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [confirmation, setConfirmation] = useState<{ whatsappUrl: string; when: string } | null>(null);
   const leadTracked = useRef(false);
+  const submissionId = useRef(crypto.randomUUID());
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -119,7 +120,7 @@ export default function BookingChat({ onClose }: { onClose: () => void }) {
       } else {
         setMessages((m) => [...m, {
           from: "bot",
-          text: "Perfeito! Agora escolha o melhor dia e horário para a sua call de 30 min com Google Meet.",
+          text: "Perfeito! Agora escolha o melhor dia e horário para a sua call de 30 min.",
         }]);
         setStep("slot");
         if (!days) loadAvailability();
@@ -157,20 +158,17 @@ export default function BookingChat({ onClose }: { onClose: () => void }) {
     if (!selectedSlot || submitting) return;
     setSubmitError(null);
     setSubmitting(true);
-    const observacoesCompletas = [
-      form.observacoes.trim(),
-      `Segmento: ${answers.segmento ?? "—"}`,
-      `Desafio: ${answers.desafio ?? "—"}`,
-      `Investimento atual: ${answers.investe ?? "—"}`,
-    ].filter(Boolean).join("\n");
-
-    const { error } = await supabase.functions.invoke("calendar-book", {
+    const { error } = await supabase.functions.invoke("capture-lead", {
       body: {
+        id: submissionId.current,
         nome: (answers.nome ?? "").trim(),
         empresa: form.empresa.trim(),
         email: form.email.trim(),
         telefone: (answers.telefone ?? "").trim(),
-        observacoes: observacoesCompletas,
+        segmento: answers.segmento ?? "",
+        desafio: answers.desafio ?? "",
+        investimentoAtual: answers.investe ?? "",
+        observacoes: form.observacoes.trim(),
         startIso: selectedSlot.iso,
       },
     });
@@ -178,12 +176,7 @@ export default function BookingChat({ onClose }: { onClose: () => void }) {
     if (error) {
       const details = error instanceof FunctionsHttpError ? await error.context.text() : error.message;
       console.error("booking failed:", details);
-      let msg = "Não foi possível concluir o agendamento. Tente novamente.";
-      try {
-        const parsed = JSON.parse(details);
-        if (parsed?.error === "slot_taken") msg = "Este horário acabou de ser reservado. Escolha outro.";
-      } catch { /* ignore */ }
-      setSubmitError(msg);
+      setSubmitError("Não foi possível enviar sua solicitação. Tente novamente.");
       return;
     }
     const whenDate = new Date(selectedSlot.iso);
@@ -191,7 +184,7 @@ export default function BookingChat({ onClose }: { onClose: () => void }) {
       weekday: "long", day: "2-digit", month: "long", hour: "2-digit", minute: "2-digit",
       timeZone: "America/Sao_Paulo",
     });
-    setConfirmation({ whatsappUrl: bookingWhatsAppUrl(answers, selectedSlot.iso), when: whenLabel });
+    setConfirmation({ whatsappUrl: bookingWhatsAppUrl({ ...answers, empresa: form.empresa.trim() }, selectedSlot.iso), when: whenLabel });
     setStep("done");
   };
 
@@ -282,7 +275,7 @@ export default function BookingChat({ onClose }: { onClose: () => void }) {
                 Escolha um horário livre
               </h2>
               <p className="text-silver mb-6 text-sm md:text-base">
-                Call comercial de 30 minutos com link do Google Meet. Fuso horário América/São Paulo.
+                Call comercial de 30 minutos. Confirmamos o horário pelo WhatsApp. Fuso horário América/São Paulo.
               </p>
 
               {loadingSlots && (
@@ -377,7 +370,7 @@ export default function BookingChat({ onClose }: { onClose: () => void }) {
                     maxLength={160}
                   />
                 </Field>
-                <Field label="E-mail (para receber o convite)">
+                <Field label="E-mail">
                   <input
                     type="email"
                     value={form.email}
@@ -409,7 +402,7 @@ export default function BookingChat({ onClose }: { onClose: () => void }) {
                   style={{ background: "#00ccf0", color: "#000" }}
                 >
                   {submitting ? (
-                    <><Loader2 className="w-4 h-4 animate-spin" /> Agendando…</>
+                    <><Loader2 className="w-4 h-4 animate-spin" /> Enviando solicitação…</>
                   ) : (
                     "Enviar solicitação"
                   )}
