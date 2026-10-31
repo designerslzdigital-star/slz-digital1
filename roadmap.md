@@ -1,0 +1,3 @@
+- [ ] Replace calendar writes with private lead storage and verify a real submission.
+- [ ] Add company to WhatsApp message and update chat tests.
+- [ ] Internal email notification: awaiting permission to configure email sending.

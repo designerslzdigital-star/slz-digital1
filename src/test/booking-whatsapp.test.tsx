@@ -38,7 +38,7 @@ describe("WhatsApp booking rules", () => {
     ));
   });
 
-  it("tracks Lead once on slot continuation before reserving, including when the slot is revisited", async () => {
+  it("tracks Lead once on slot continuation, including when the slot is revisited", async () => {
     await chooseSlot();
     expect(mocks.track).toHaveBeenCalledWith("Lead", undefined, { name: "Maria Silva", phone: "98999999999" });
     expect(mocks.invoke).not.toHaveBeenCalledWith("calendar-book", expect.anything());
@@ -47,17 +47,33 @@ describe("WhatsApp booking rules", () => {
     expect(mocks.track).toHaveBeenCalledTimes(1);
   });
 
-  it("preserves the calendar reservation without opening WhatsApp automatically", async () => {
+  it("stores the completed lead instead of creating a calendar event, without opening WhatsApp automatically", async () => {
     const open = vi.spyOn(window, "open").mockImplementation(() => null);
     await chooseSlot();
     fireEvent.change(screen.getByPlaceholderText("Nome da sua empresa"), { target: { value: "Empresa Teste" } });
     fireEvent.change(screen.getByPlaceholderText("voce@empresa.com"), { target: { value: "maria@example.com" } });
     fireEvent.click(screen.getByRole("button", { name: "Enviar solicitação" }));
-    await waitFor(() => expect(mocks.invoke).toHaveBeenCalledWith("calendar-book", { body: expect.objectContaining({ startIso: iso, nome: "Maria Silva", empresa: "Empresa Teste" }) }));
+    await waitFor(() => expect(mocks.invoke).toHaveBeenCalledWith("capture-lead", { body: expect.objectContaining({ startIso: iso, nome: "Maria Silva", empresa: "Empresa Teste", email: "maria@example.com", telefone: "98999999999", segmento: "Saúde", desafio: "Marketing sem retorno" }) }));
+    expect(mocks.invoke).not.toHaveBeenCalledWith("calendar-book", expect.anything());
     const link = await screen.findByRole("link", { name: "Confirmar no WhatsApp" });
-    expect(link.getAttribute("href")).toBe(bookingWhatsAppUrl({ nome: "Maria Silva", segmento: "Saúde", desafio: "Marketing sem retorno" }, iso));
+    expect(link.getAttribute("href")).toBe(bookingWhatsAppUrl({ nome: "Maria Silva", empresa: "Empresa Teste", segmento: "Saúde", desafio: "Marketing sem retorno" }, iso));
     expect(link.getAttribute("target")).toBe("_blank");
     expect(open).not.toHaveBeenCalled();
     open.mockRestore();
+  });
+
+  it("adds the collected company after the name", () => {
+    const message = new URL(bookingWhatsAppUrl({ nome: "Maria Silva", empresa: "Empresa Teste" }, iso)).searchParams.get("text");
+    expect(message).toContain("Meu nome: Maria Silva\n\nEmpresa: Empresa Teste\n\nSegmento:");
+  });
+
+  it("keeps WhatsApp unavailable if lead storage fails", async () => {
+    await chooseSlot();
+    mocks.invoke.mockResolvedValueOnce({ data: null, error: new Error("save_failed") });
+    fireEvent.change(screen.getByPlaceholderText("Nome da sua empresa"), { target: { value: "Empresa Teste" } });
+    fireEvent.change(screen.getByPlaceholderText("voce@empresa.com"), { target: { value: "maria@example.com" } });
+    fireEvent.click(screen.getByRole("button", { name: "Enviar solicitação" }));
+    await waitFor(() => expect(mocks.invoke).toHaveBeenCalledWith("capture-lead", expect.anything()));
+    expect(screen.queryByRole("link", { name: "Confirmar no WhatsApp" })).toBeNull();
   });
 });

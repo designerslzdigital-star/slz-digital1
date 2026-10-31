@@ -1,4 +1,4 @@
-type BookingAnswers = { nome?: string; segmento?: string; desafio?: string };
+type BookingAnswers = { nome?: string; empresa?: string; segmento?: string; desafio?: string };
 
 export function bookingWhatsAppUrl(answers: BookingAnswers, startIso: string) {
   const date = new Date(startIso);
@@ -10,7 +10,7 @@ export function bookingWhatsAppUrl(answers: BookingAnswers, startIso: string) {
   const when = `${part("weekday")}, ${part("day")} de ${part("month")} às ${part("hour")}:${part("minute")}`;
   const message = `Olá, tudo bem? Vim pelo site da SLZ Digital e gostaria de agendar uma reunião!
 
-Meu nome: ${answers.nome ?? ""}
+Meu nome: ${answers.nome ?? ""}${answers.empresa?.trim() ? `\n\nEmpresa: ${answers.empresa.trim()}` : ""}
 
 Segmento: ${answers.segmento ?? ""}
 
