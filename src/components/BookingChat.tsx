@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { X, Check, Loader2, Video, Send } from "lucide-react";
+import { X, Check, Loader2, MessageCircle, Send } from "lucide-react";
 import slzLogo from "@/assets/slz-logo.png.asset.json";
 import { supabase } from "@/integrations/supabase/client";
 import { FunctionsHttpError } from "@supabase/supabase-js";
 import { fbqTrack } from "@/lib/fbq";
+import { bookingWhatsAppUrl } from "@/lib/booking-whatsapp";
+import { Button } from "@/components/ui/button";
 
 type Slot = { time: string; iso: string };
 type Day = { date: string; label: string; slots: Slot[] };
@@ -70,7 +72,8 @@ export default function BookingChat({ onClose }: { onClose: () => void }) {
   const [form, setForm] = useState<Form>(emptyForm);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [confirmation, setConfirmation] = useState<{ meetLink: string | null; when: string } | null>(null);
+  const [confirmation, setConfirmation] = useState<{ whatsappUrl: string; when: string } | null>(null);
+  const leadTracked = useRef(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -132,6 +135,15 @@ export default function BookingChat({ onClose }: { onClose: () => void }) {
 
   const activeDay = days?.find((d) => d.date === selectedDate) ?? null;
 
+  const continueWithSlot = () => {
+    if (!selectedSlot) return;
+    if (!leadTracked.current) {
+      leadTracked.current = true;
+      fbqTrack("Lead", undefined, { name: answers.nome, phone: answers.telefone });
+    }
+    setStep("form");
+  };
+
   const validateForm = (): string | null => {
     if (!form.empresa.trim()) return "Informe o nome da empresa.";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) return "Informe um e-mail válido.";
@@ -142,6 +154,7 @@ export default function BookingChat({ onClose }: { onClose: () => void }) {
   const submit = async () => {
     const err = validateForm();
     if (err) { setSubmitError(err); return; }
+    if (!selectedSlot || submitting) return;
     setSubmitError(null);
     setSubmitting(true);
     const observacoesCompletas = [
@@ -151,14 +164,14 @@ export default function BookingChat({ onClose }: { onClose: () => void }) {
       `Investimento atual: ${answers.investe ?? "—"}`,
     ].filter(Boolean).join("\n");
 
-    const { data, error } = await supabase.functions.invoke("calendar-book", {
+    const { error } = await supabase.functions.invoke("calendar-book", {
       body: {
         nome: (answers.nome ?? "").trim(),
         empresa: form.empresa.trim(),
         email: form.email.trim(),
         telefone: (answers.telefone ?? "").trim(),
         observacoes: observacoesCompletas,
-        startIso: selectedSlot!.iso,
+        startIso: selectedSlot.iso,
       },
     });
     setSubmitting(false);
@@ -173,13 +186,12 @@ export default function BookingChat({ onClose }: { onClose: () => void }) {
       setSubmitError(msg);
       return;
     }
-    const whenDate = new Date(selectedSlot!.iso);
+    const whenDate = new Date(selectedSlot.iso);
     const whenLabel = whenDate.toLocaleString("pt-BR", {
       weekday: "long", day: "2-digit", month: "long", hour: "2-digit", minute: "2-digit",
       timeZone: "America/Sao_Paulo",
     });
-    setConfirmation({ meetLink: data?.meetLink ?? null, when: whenLabel });
-    fbqTrack("Lead", undefined, { name: answers.nome, phone: answers.telefone });
+    setConfirmation({ whatsappUrl: bookingWhatsAppUrl(answers, selectedSlot.iso), when: whenLabel });
     setStep("done");
   };
 
@@ -293,7 +305,7 @@ export default function BookingChat({ onClose }: { onClose: () => void }) {
                     {days.map((d) => (
                       <button
                         key={d.date}
-                        onClick={() => setSelectedDate(d.date)}
+                        onClick={() => { setSelectedDate(d.date); setSelectedSlot(null); }}
                         className="px-3 py-2 rounded-lg text-sm font-medium transition-all"
                         style={
                           selectedDate === d.date
@@ -324,7 +336,7 @@ export default function BookingChat({ onClose }: { onClose: () => void }) {
                   </div>
                   <button
                     disabled={!selectedSlot}
-                    onClick={() => setStep("form")}
+                    onClick={continueWithSlot}
                     className="mt-6 w-full py-3 rounded-xl font-heading font-bold transition-transform hover:scale-[1.01] disabled:opacity-40 disabled:hover:scale-100"
                     style={{ background: "#00ccf0", color: "#000" }}
                   >
@@ -399,7 +411,7 @@ export default function BookingChat({ onClose }: { onClose: () => void }) {
                   {submitting ? (
                     <><Loader2 className="w-4 h-4 animate-spin" /> Agendando…</>
                   ) : (
-                    "Confirmar agendamento"
+                    "Enviar solicitação"
                   )}
                 </button>
               </div>
@@ -412,23 +424,22 @@ export default function BookingChat({ onClose }: { onClose: () => void }) {
                 <Check className="w-7 h-7 text-black" />
               </div>
               <h3 className="font-heading font-bold text-2xl text-white mb-2">
-                Call agendada, {(answers.nome ?? "").split(" ")[0]}!
+                Quase lá, {(answers.nome ?? "").split(" ")[0]}!
               </h3>
               <p className="text-silver mb-2 text-sm">
-                Enviamos o convite para <span className="text-white">{form.email}</span>.
+                Toque no botão abaixo para enviar sua solicitação no WhatsApp e confirmar o horário com nosso time.
               </p>
+              <p className="text-muted-foreground mb-2 text-sm">Solicitação enviada, confirmamos pelo WhatsApp.</p>
               <p className="text-white font-medium mb-6">{confirmation.when}</p>
-              {confirmation.meetLink && (
+              <Button asChild variant="whatsapp" size="lg" className="font-heading mb-3 whitespace-normal h-auto py-3">
                 <a
-                  href={confirmation.meetLink}
+                  href={confirmation.whatsappUrl}
                   target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-heading font-bold transition-transform hover:scale-[1.02] mb-3"
-                  style={{ background: "#00ccf0", color: "#000" }}
+                  rel="noopener noreferrer"
                 >
-                  <Video className="w-4 h-4" /> Abrir link do Google Meet
+                  <MessageCircle className="w-4 h-4" /> Confirmar no WhatsApp
                 </a>
-              )}
+              </Button>
               <div>
                 <button onClick={onClose} className="text-silver text-sm underline hover:text-white mt-2">
                   Fechar
@@ -445,7 +456,7 @@ export default function BookingChat({ onClose }: { onClose: () => void }) {
           <div className="max-w-2xl mx-auto">
             {currentChat?.type === "choice" ? (
               <div className="flex flex-wrap gap-2 justify-center">
-                {currentChat.options!.map((opt) => (
+                {currentChat.options?.map((opt) => (
                   <button
                     key={opt}
                     onClick={() => advanceChat(opt)}
