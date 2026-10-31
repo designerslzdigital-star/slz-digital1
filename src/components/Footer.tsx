@@ -57,7 +57,12 @@ const Footer = () => (
               <Instagram className="w-4 h-4 text-primary" />
               @slzdigital1
             </a>
-            <p>www.slzdigital.com.br</p>
+            <a
+              href="https://www.slzdigital.com.br/"
+              className="block hover:text-foreground transition-colors"
+            >
+              www.slzdigital.com.br
+            </a>
           </div>
         </div>
       </div>
