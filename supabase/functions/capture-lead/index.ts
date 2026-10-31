@@ -1,6 +1,7 @@
 import { createClient } from 'npm:@supabase/supabase-js@2';
 import { corsHeaders } from 'npm:@supabase/supabase-js@2/cors';
 import { z } from 'npm:zod@3.23.8';
+import { notificationPayload } from './notification.ts';
 
 const schema = z.object({
   id: z.string().uuid(),
@@ -40,7 +41,37 @@ Deno.serve(async (req) => {
       console.error('lead insert failed', error.code);
       return respond({ error: 'save_failed' }, 500);
     }
-    return respond({ ok: true });
+    // Read stored values: a duplicate request cannot replace the notification data.
+    const { data: stored, error: readError } = await db.from('leads').select('*').eq('id', lead.id).single();
+    if (readError || !stored) return respond({ ok: true, notification: 'failed' });
+    if (stored.email_notificado_em) return respond({ ok: true, notification: 'already_sent' });
+    const resendKey = Deno.env.get('RESEND_API_KEY');
+    if (!resendKey) return respond({ ok: true, notification: 'not_configured' });
+    try {
+      const emailResponse = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${resendKey}`,
+          'Content-Type': 'application/json',
+          'Idempotency-Key': `lead-notification-${stored.id}`,
+        },
+        body: JSON.stringify(notificationPayload(stored)),
+      });
+      if (!emailResponse.ok) {
+        const details = await emailResponse.text();
+        console.error('Resend notification failed', emailResponse.status, details);
+        return respond({ ok: true, notification: 'failed', status: emailResponse.status });
+      }
+      const email = await emailResponse.json();
+      const { error: updateError } = await db.from('leads').update({
+        email_notificado_em: new Date().toISOString(), email_aviso_id: email.id,
+      }).eq('id', stored.id);
+      if (updateError) console.error('notification status save failed', updateError.code);
+      return respond({ ok: true, notification: 'sent' });
+    } catch {
+      console.error('Resend notification unavailable');
+      return respond({ ok: true, notification: 'failed' });
+    }
   } catch {
     return respond({ error: 'invalid_request' }, 400);
   }
