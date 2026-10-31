@@ -33,7 +33,7 @@ const Navbar = () => {
       <div className="container mx-auto flex items-center justify-between h-20 lg:h-24 px-4 lg:px-8">
         {/* Logo */}
         <a href="#inicio" className="flex shrink-0 items-center">
-          <img src={slzLogo.url} alt="SLZ Digital" className="w-48 sm:w-56 lg:w-64 h-auto object-contain" />
+          <img src={slzLogo.url} alt="SLZ Digital" width={600} height={179} decoding="async" className="w-48 sm:w-56 lg:w-64 h-auto object-contain" />
         </a>
 
         {/* Desktop Nav */}

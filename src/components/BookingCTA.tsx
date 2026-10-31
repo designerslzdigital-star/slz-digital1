@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { Calendar } from "lucide-react";
-import BookingChat from "./BookingChat";
+const BookingChat = lazy(() => import("./BookingChat"));
 
 const BookingCTA = () => {
   const [open, setOpen] = useState(false);
@@ -32,7 +32,7 @@ const BookingCTA = () => {
           Marcar minha call gratuita
         </button>
       </div>
-      {open && <BookingChat onClose={() => setOpen(false)} />}
+      {open && <Suspense fallback={null}><BookingChat onClose={() => setOpen(false)} /></Suspense>}
     </section>
   );
 };

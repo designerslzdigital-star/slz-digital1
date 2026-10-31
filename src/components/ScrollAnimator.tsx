@@ -12,6 +12,10 @@ const ScrollAnimator = ({ children, className = "" }: { children: ReactNode; cla
       setVisible(true);
       return;
     }
+    if (ref.current && ref.current.getBoundingClientRect().top < window.innerHeight) {
+      setVisible(true);
+      return;
+    }
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
