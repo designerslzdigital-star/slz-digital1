@@ -5,9 +5,9 @@
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png?v=20261030-globo" />
     <link rel="shortcut icon" href="/favicon.png?v=20261030-globo" />
     <link rel="apple-touch-icon" href="/favicon.png?v=20261030-globo" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="preload" as="image" href="/__l5e/assets-v1/7138280b-843e-430e-8eac-c78f7c75cff2/predio-marcus-barbosa.webp" media="(min-width: 1024px)" fetchpriority="high" />
+    <link rel="preload" as="font" type="font/woff2" href="/__l5e/assets-v1/c8bfe43e-a786-49f2-90c6-df5b1f070c22/syne-latin.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/__l5e/assets-v1/0e72ede7-984a-4912-b294-305e0e9d89cc/space-grotesk-latin.woff2" crossorigin />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SLZ Digital | Agência de Marketing Digital em São Luís, MA</title>
     <meta name="description" content="SLZ Digital: agência de marketing e software em São Luís, MA. Marketing para clínicas, tráfego pago, social media, vídeo, sites, sistemas e IA.">
@@ -112,16 +112,34 @@
   </script>
   <!-- Meta Pixel Code -->
   <script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '1721314979917926');
-  fbq('track', 'PageView');
+  // Queue conversions immediately; defer the external Pixel until the page is ready.
+  if (!window.fbq) {
+    var fbq = window.fbq = function() {
+      fbq.callMethod ? fbq.callMethod.apply(fbq, arguments) : fbq.queue.push(arguments);
+    };
+    window._fbq = fbq;
+    fbq.push = fbq;
+    fbq.loaded = true;
+    fbq.version = '2.0';
+    fbq.queue = [];
+    fbq('init', '1721314979917926');
+    fbq('track', 'PageView');
+    var loadPixel = function() {
+      var script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://connect.facebook.net/en_US/fbevents.js';
+      document.head.appendChild(script);
+    };
+    var schedulePixel = function() {
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(loadPixel, { timeout: 2000 });
+      } else {
+        window.setTimeout(loadPixel, 0);
+      }
+    };
+    if (document.readyState === 'complete') schedulePixel();
+    else window.addEventListener('load', schedulePixel, { once: true });
+  }
   </script>
   <!-- End Meta Pixel Code -->
   <meta property="og:title" content="SLZ Digital | Agência de Marketing Digital em São Luís, MA">
