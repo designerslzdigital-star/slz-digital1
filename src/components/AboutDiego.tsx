@@ -77,7 +77,7 @@ const AboutDiego = () => (
           <Button variant="cyan" size="lg" className="w-full" asChild>
             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
               <MessageCircle className="w-4 h-4" />
-              Falar com a Slz Digital agora
+              Falar com a SLZ Digital agora
             </a>
           </Button>
         </div>
