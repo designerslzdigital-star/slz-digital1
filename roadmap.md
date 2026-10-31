@@ -1,3 +1,3 @@
 - [x] Replace calendar writes with private lead storage and verify a real submission.
 - [x] Add company to WhatsApp message and update chat tests.
-- [ ] Internal email notification: awaiting permission to configure email sending.
+- [ ] Internal email notification via Resend from/to atendimento@slzdigital.com.br: awaiting RESEND_API_KEY; no DNS changes.
