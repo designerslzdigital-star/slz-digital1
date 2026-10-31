@@ -1,3 +1,8 @@
+import YouTubeTestimonial from "./YouTubeTestimonial";
+import shoppingThumbnail from "@/assets/testimonial-ZgSan0-SEog.jpg.asset.json";
+import genialThumbnail from "@/assets/testimonial-_O1eJPMhMVs.jpg.asset.json";
+import viaThumbnail from "@/assets/testimonial-It1tOy7ghEM.jpg.asset.json";
+
 const Testimonials = () => (
   <section id="depoimentos" className="py-20 relative">
     <div className="container mx-auto px-4">
@@ -14,24 +19,16 @@ const Testimonials = () => (
       <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto items-start">
 
         {[
-          { src: "https://www.youtube.com/embed/ZgSan0-SEog", name: "Shopping da Limpeza", segment: "Varejo" },
-          { src: "https://www.youtube.com/embed/_O1eJPMhMVs", name: "Genial Consultoria", segment: "Consultoria" },
-          { src: "https://www.youtube.com/embed/It1tOy7ghEM", name: "Via Táxi Aéreo", segment: "Transporte" },
+          { id: "ZgSan0-SEog", thumbnail: shoppingThumbnail.url, name: "Shopping da Limpeza", segment: "Varejo" },
+          { id: "_O1eJPMhMVs", thumbnail: genialThumbnail.url, name: "Genial Consultoria", segment: "Consultoria" },
+          { id: "It1tOy7ghEM", thumbnail: viaThumbnail.url, name: "Via Táxi Aéreo", segment: "Transporte" },
         ].map((t) => (
           <div
             key={t.name}
             className="rounded-2xl overflow-hidden flex flex-col"
             style={{ backgroundColor: "#161616", border: "1px solid rgba(0,204,240,0.15)" }}
           >
-            <div className="w-full" style={{ aspectRatio: "9 / 16" }}>
-              <iframe
-                src={t.src}
-                title={t.name}
-                className="w-full h-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
+            <YouTubeTestimonial id={t.id} name={t.name} thumbnail={t.thumbnail} />
             <div className="p-6">
               <h3 className="font-heading font-bold text-xl text-white">{t.name}</h3>
               <p className="text-sm mt-1" style={{ color: "#00ccf0" }}>{t.segment}</p>

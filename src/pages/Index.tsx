@@ -6,14 +6,16 @@ import PainPoints from "@/components/PainPoints";
 import Services from "@/components/Services";
 import AboutDiego from "@/components/AboutDiego";
 import ClientLogos from "@/components/ClientLogos";
-import HowItWorks from "@/components/HowItWorks";
+import { lazy, Suspense } from "react";
 import Niches from "@/components/Niches";
-import Testimonials from "@/components/Testimonials";
-import FAQ from "@/components/FAQ";
 import BookingCTA from "@/components/BookingCTA";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import ScrollAnimator from "@/components/ScrollAnimator";
+
+const Testimonials = lazy(() => import("@/components/Testimonials"));
+const FAQ = lazy(() => import("@/components/FAQ"));
+const HowItWorks = lazy(() => import("@/components/HowItWorks"));
 
 const Index = () => (
   <div className="min-h-screen bg-background">
@@ -26,9 +28,11 @@ const Index = () => (
     <ScrollAnimator><AboutDiego /></ScrollAnimator>
     <ScrollAnimator><ClientLogos /></ScrollAnimator>
     <ScrollAnimator><Niches /></ScrollAnimator>
-    <ScrollAnimator><Testimonials /></ScrollAnimator>
-    <ScrollAnimator><HowItWorks /></ScrollAnimator>
-    <ScrollAnimator><FAQ /></ScrollAnimator>
+    <Suspense fallback={null}>
+      <ScrollAnimator><Testimonials /></ScrollAnimator>
+      <ScrollAnimator><HowItWorks /></ScrollAnimator>
+      <ScrollAnimator><FAQ /></ScrollAnimator>
+    </Suspense>
     <ScrollAnimator><BookingCTA /></ScrollAnimator>
     <Footer />
     <WhatsAppButton />

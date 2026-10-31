@@ -16,22 +16,22 @@ import vivenciarLogo from "@/assets/clients/vivenciar-logo.webp.asset.json";
 import logoCliente3 from "@/assets/clients/logo-cliente-3.webp.asset.json";
 
 const clients = [
-  { name: "Shopping da Limpeza", logo: shoppingLimpezaAsset.url },
-  { name: "Genial Consultoria", logo: genialConsultoria },
-  { name: "Via Táxi Aéreo", logo: viaTaxi },
-  { name: "Uarau Tour", logo: uarauTour },
-  { name: "Bucomed", logo: bucomed },
-  { name: "Faceimplante", logo: faceimplante },
-  { name: "PagCarro", logo: pagcarro },
-  { name: "Taguatur", logo: taguatur },
-  { name: "Editora Internacional", logo: editoraInternacional },
-  { name: "Decanter", logo: decanter },
-  { name: "Aruá", logo: aruaAsset.url },
-  { name: "ACM Comércio e Equipamentos", logo: acmAsset.url },
-  { name: "Uniflex Móveis para Escritório", logo: uniflexAsset.url },
-  { name: "Alta Branco", logo: logoAltaBranco.url },
-  { name: "Vivenciar", logo: vivenciarLogo.url },
-  { name: "Cliente", logo: logoCliente3.url },
+  { name: "Shopping da Limpeza", logo: shoppingLimpezaAsset.url, width: 480, height: 600 },
+  { name: "Genial Consultoria", logo: genialConsultoria, width: 600, height: 272 },
+  { name: "Via Táxi Aéreo", logo: viaTaxi, width: 600, height: 600 },
+  { name: "Uarau Tour", logo: uarauTour, width: 600, height: 259 },
+  { name: "Bucomed", logo: bucomed, width: 600, height: 600 },
+  { name: "Faceimplante", logo: faceimplante, width: 500, height: 500 },
+  { name: "PagCarro", logo: pagcarro, width: 600, height: 285 },
+  { name: "Taguatur", logo: taguatur, width: 600, height: 143 },
+  { name: "Editora Internacional", logo: editoraInternacional, width: 600, height: 265 },
+  { name: "Decanter", logo: decanter, width: 600, height: 166 },
+  { name: "Aruá", logo: aruaAsset.url, width: 600, height: 217 },
+  { name: "ACM Comércio e Equipamentos", logo: acmAsset.url, width: 600, height: 141 },
+  { name: "Uniflex Móveis para Escritório", logo: uniflexAsset.url, width: 480, height: 600 },
+  { name: "Alta Branco", logo: logoAltaBranco.url, width: 600, height: 600 },
+  { name: "Vivenciar", logo: vivenciarLogo.url, width: 600, height: 600 },
+  { name: "Cliente", logo: logoCliente3.url, width: 600, height: 200 },
 ];
 
 const ClientLogos = () => {
@@ -65,6 +65,10 @@ const ClientLogos = () => {
               <img
                 src={client.logo}
                 alt={client.name}
+                width={client.width}
+                height={client.height}
+                loading="lazy"
+                decoding="async"
                 className="max-h-full max-w-full object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity"
               />
             </div>
@@ -77,6 +81,10 @@ const ClientLogos = () => {
               <img
                 src={client.logo}
                 alt={client.name}
+                width={client.width}
+                height={client.height}
+                loading="lazy"
+                decoding="async"
                 className="max-h-full max-w-full object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity"
               />
             </div>

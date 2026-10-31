@@ -18,12 +18,19 @@ const Hero = () => {
         {/* Left - Photo */}
         <div className="hidden lg:flex items-center justify-center relative min-h-screen p-8">
           <div className="max-h-[500px] rounded-2xl overflow-hidden aspect-[3/4]">
-            <img
-              src={predioImg.url}
+            <picture>
+              <source media="(min-width: 1024px)" srcSet={predioImg.url} />
+              <img
+              src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
               alt="Marcus Barbosa | Intelligent Office"
+              width={960}
+              height={1200}
+              fetchPriority="high"
+              decoding="async"
               className="w-full h-full object-cover"
               style={{ objectPosition: "center top" }}
             />
+            </picture>
           </div>
         </div>
 

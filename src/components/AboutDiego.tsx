@@ -40,7 +40,7 @@ const AboutDiego = () => (
         {/* Left - Photo */}
         <div className="relative flex justify-center">
           <div className="w-full max-w-sm aspect-[3/4] rounded-2xl overflow-hidden">
-            <img src={diegoImg.url} alt="Diego - Fundador SLZ Digital" className="w-full h-full object-cover object-top" />
+            <img src={diegoImg.url} alt="Diego - Fundador SLZ Digital" width={800} height={1000} loading="lazy" decoding="async" className="w-full h-full object-cover object-top" />
           </div>
           {/* Floating badges */}
           {badges.map((badge, i) => (

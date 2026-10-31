@@ -1,3 +1,4 @@
 - [x] Replace calendar writes with private lead storage and verify a real submission.
 - [x] Add company to WhatsApp message and update chat tests.
+- [x] Optimize media, fonts, initial visibility, section loading and Pixel timing; verify desktop/mobile and click-to-play.
 - [ ] Verify internal email notification via Resend from/to atendimento@slzdigital.com.br: configured, but Resend rejected the test with 403 (domain not verified for supplied key). Requires a key with access to the verified domain; no DNS changes.
