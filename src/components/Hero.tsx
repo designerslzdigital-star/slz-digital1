@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MapPin } from "lucide-react";
-import predioImg from "@/assets/predio-marcus-barbosa.png.asset.json";
+import predioImg from "@/assets/predio-marcus-barbosa.webp.asset.json";
 
 const Hero = () => {
   return (
