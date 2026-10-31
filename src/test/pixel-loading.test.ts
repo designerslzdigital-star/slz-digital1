@@ -18,7 +18,7 @@ describe("deferred Meta Pixel", () => {
     runInNewContext(source, { window, document: { readyState: "loading", createElement: () => ({}), head: { appendChild } } });
     window.fbq?.("track", "Lead", {}, { eventID: "early-lead" });
     expect(appendChild).not.toHaveBeenCalled();
-    expect(window.fbq?.queue).toEqual([
+    expect(window.fbq?.queue.map((entry) => Array.from(entry))).toEqual([
       ["init", "1721314979917926"], ["track", "PageView"], ["track", "Lead", {}, { eventID: "early-lead" }],
     ]);
     onLoad?.();
