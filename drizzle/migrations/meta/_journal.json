@@ -8,6 +8,13 @@
       "when": 1793450918948,
       "tag": "0000_create_leads",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1793451517953,
+      "tag": "0001_lead_email_status",
+      "breakpoints": true
     }
   ]
 }
