@@ -12,13 +12,13 @@ const Footer = () => (
           </a>
           <div className="space-y-2 text-sm text-silver">
             <a
-              href="https://maps.google.com/?q=Marcus+Barbosa+Intelligent+Office+Av+dos+Holandeses+6916+Calhau+São+Luís+MA+65071-380"
+              href="https://maps.google.com/?q=Edifício+Intelligent+Office+Sala+115+Av+dos+Holandeses+6916+Calhau+São+Luís+MA+65071-380"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-start gap-2 hover:text-foreground transition-colors"
             >
               <MapPin className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-              <span>Marcus Barbosa | Intelligent Office, Sala 115, Av. dos Holandeses, 6916 - Calhau, São Luís — MA, 65071-380</span>
+              <span>Edifício Intelligent Office, Sala 115, Av. dos Holandeses, 6916 - Calhau, São Luís — MA, 65071-380</span>
             </a>
           </div>
         </div>
