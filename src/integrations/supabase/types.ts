@@ -20,6 +20,8 @@ export type Database = {
           data_horario_escolhido: string
           desafio: string
           email: string | null
+          email_aviso_id: string | null
+          email_notificado_em: string | null
           empresa: string | null
           id: string
           investimento_atual: string | null
@@ -33,6 +35,8 @@ export type Database = {
           data_horario_escolhido: string
           desafio: string
           email?: string | null
+          email_aviso_id?: string | null
+          email_notificado_em?: string | null
           empresa?: string | null
           id?: string
           investimento_atual?: string | null
@@ -46,6 +50,8 @@ export type Database = {
           data_horario_escolhido?: string
           desafio?: string
           email?: string | null
+          email_aviso_id?: string | null
+          email_notificado_em?: string | null
           empresa?: string | null
           id?: string
           investimento_atual?: string | null

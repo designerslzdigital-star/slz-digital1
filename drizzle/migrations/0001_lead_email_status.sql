@@ -1,0 +1,1 @@
+ALTER TABLE public.leads ADD COLUMN email_notificado_em timestamptz, ADD COLUMN email_aviso_id text;
