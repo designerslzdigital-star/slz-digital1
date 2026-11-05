@@ -142,12 +142,38 @@
   }
   </script>
   <!-- End Meta Pixel Code -->
+  <!-- Google Tag Manager -->
+  <script>
+  // Initialize the dataLayer immediately; defer the GTM script until the page is ready.
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+  var loadGTM = function() {
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-PJKWW93';
+    document.head.appendChild(script);
+  };
+  var scheduleGTM = function() {
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(loadGTM, { timeout: 2000 });
+    } else {
+      window.setTimeout(loadGTM, 0);
+    }
+  };
+  if (document.readyState === 'complete') scheduleGTM();
+  else window.addEventListener('load', scheduleGTM, { once: true });
+  </script>
+  <!-- End Google Tag Manager -->
   <meta property="og:title" content="SLZ Digital | Agência de Marketing Digital em São Luís, MA">
   <meta name="twitter:title" content="SLZ Digital | Agência de Marketing Digital em São Luís, MA">
   <meta property="og:description" content="SLZ Digital: agência de marketing e software em São Luís, MA. Marketing para clínicas, tráfego pago, social media, vídeo, sites, sistemas e IA.">
   <meta name="twitter:description" content="SLZ Digital: agência de marketing e software em São Luís, MA. Marketing para clínicas, tráfego pago, social media, vídeo, sites, sistemas e IA.">
 </head>
   <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PJKWW93"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=1721314979917926&ev=PageView&noscript=1"
     /></noscript>
